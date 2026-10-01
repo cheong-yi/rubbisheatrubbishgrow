@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:hermes:rerg:v1:evidence",
+  "title": "RERG v1 evidence packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "can_execute",
+    "mutation",
+    "transport",
+    "rollback_caveat",
+    "evidence_id",
+    "candidate_id",
+    "facts"
+  ],
+  "properties": {
+    "schema_version": {"const": "rerg/v1"},
+    "artifact_type": {"const": "evidence"},
+    "can_execute": {"type": "boolean", "const": false},
+    "mutation": {"$ref": "#/$defs/inertMutation"},
+    "transport": {"$ref": "#/$defs/inertTransport"},
+    "rollback_caveat": {"const": "rollback_does_not_cover_leaked_data_or_poisoned_memory"},
+    "evidence_id": {"type": "string", "minLength": 1},
+    "candidate_id": {"type": "string", "minLength": 1},
+    "facts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "oneOf": [
+          {"$ref": "#/$defs/legacyFact"},
+          {"$ref": "#/$defs/typedObservation"}
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "inertMutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    },
+    "inertTransport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    },
+    "legacyFact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim", "source", "proof_status"],
+      "properties": {
+        "claim": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "minLength": 1},
+        "proof_status": {"enum": ["verified", "unverified", "stale"]}
+      }
+    },
+    "typedObservation": {
+      "oneOf": [
+        {"$ref": "#/$defs/candidateFormObservation"},
+        {"$ref": "#/$defs/workflowObservation"},
+        {"$ref": "#/$defs/targetScopeObservation"},
+        {"$ref": "#/$defs/riskObservation"}
+      ]
+    },
+    "observationId": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"},
+    "observationSource": {"type": "string", "minLength": 1},
+    "candidateFormObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observation_id", "subject", "predicate", "value", "source", "proof_status"
+      ],
+      "properties": {
+        "observation_id": {"$ref": "#/$defs/observationId"},
+        "subject": {"const": "candidate"},
+        "predicate": {"const": "candidate.form"},
+        "value": {
+          "enum": [
+            "skill", "hook", "plugin", "prompt_workflow", "adapter",
+            "eval_harness", "external_tool_service", "unknown"
+          ]
+        },
+        "source": {"$ref": "#/$defs/observationSource"},
+        "proof_status": {"enum": ["verified", "unverified", "stale"]}
+      }
+    },
+    "workflowObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observation_id", "subject", "predicate", "value", "source", "proof_status"
+      ],
+      "properties": {
+        "observation_id": {"$ref": "#/$defs/observationId"},
+        "subject": {"const": "workflow"},
+        "predicate": {
+          "enum": [
+            "workflow.missing_surface",
+            "workflow.existing_equivalent_surface",
+            "workflow.inert_trial_available"
+          ]
+        },
+        "value": {
+          "oneOf": [
+            {"type": "boolean"},
+            {"const": "unknown"}
+          ]
+        },
+        "source": {"$ref": "#/$defs/observationSource"},
+        "proof_status": {"enum": ["verified", "unverified", "stale"]}
+      }
+    },
+    "targetScopeObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observation_id", "subject", "predicate", "value", "source", "proof_status"
+      ],
+      "properties": {
+        "observation_id": {"$ref": "#/$defs/observationId"},
+        "subject": {"const": "target"},
+        "predicate": {"const": "target.scope"},
+        "value": {
+          "enum": [
+            "hermes_static_source", "existing_operator_surface",
+            "outside_coverage", "unknown"
+          ]
+        },
+        "source": {"$ref": "#/$defs/observationSource"},
+        "proof_status": {"enum": ["verified", "unverified", "stale"]}
+      }
+    },
+    "riskObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observation_id", "subject", "predicate", "value", "source", "proof_status"
+      ],
+      "properties": {
+        "observation_id": {"$ref": "#/$defs/observationId"},
+        "subject": {"const": "risk"},
+        "predicate": {
+          "enum": [
+            "risk.credentials_access",
+            "risk.browser_session_state",
+            "risk.network_api_contact",
+            "risk.persistent_state",
+            "risk.repository_or_profile_config_write",
+            "risk.user_data_access",
+            "risk.control_plane_change",
+            "risk.prompt_injection_exposure",
+            "risk.irreversible_effect"
+          ]
+        },
+        "value": {
+          "oneOf": [
+            {"type": "boolean"},
+            {"const": "unknown"}
+          ]
+        },
+        "source": {"$ref": "#/$defs/observationSource"},
+        "proof_status": {"enum": ["verified", "unverified", "stale"]}
+      }
+    }
+  }
+}

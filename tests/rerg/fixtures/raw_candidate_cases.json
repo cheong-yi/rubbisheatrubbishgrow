@@ -1,0 +1,396 @@
+{
+  "schema": "rerg-raw-candidate-test-cases/v1",
+  "cases": [
+    {
+      "id": "RAW-POSITIVE",
+      "raw_request": {
+        "schema_version": "rerg-raw-candidate-request/v1",
+        "artifact_type": "raw-candidate-request",
+        "request_id": "raw-positive-issue46",
+        "candidate": {
+          "source_kind": "note",
+          "source_locator": "github:cheong-yi/hermes-discord-plugin#46",
+          "inline_content": "The current operator requires caller-supplied capabilities and paths; the required raw-intake MUW remains incomplete."
+        },
+        "adoption_question": "Should RERG close the verified raw-intake workflow gap?",
+        "captured_at": "2026-07-17T15:00:00Z",
+        "max_age_seconds": 86400,
+        "target": "hermes-static"
+      },
+      "reader_output": {
+        "status": "verified",
+        "source_locator": "github:cheong-yi/hermes-discord-plugin#46",
+        "captured_at": "2026-07-17T15:00:00Z",
+        "content_sha256": "sha256:0cb38406b3d7bc0bff23b72af31f573e714789be356ae67879ee402380bf47d1",
+        "evidence": {
+          "schema_version": "rerg/v1",
+          "artifact_type": "evidence",
+          "can_execute": false,
+          "mutation": {"mode": "inert"},
+          "transport": {"mode": "inert"},
+          "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+          "evidence_id": "evidence-raw-positive-issue46",
+          "candidate_id": "raw-positive-issue46",
+          "facts": [
+            {
+              "observation_id": "positive-candidate-form",
+              "subject": "candidate",
+              "predicate": "candidate.form",
+              "value": "plugin",
+              "source": "github:cheong-yi/hermes-discord-plugin#46",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "positive-missing-surface",
+              "subject": "workflow",
+              "predicate": "workflow.missing_surface",
+              "value": true,
+              "source": "github:cheong-yi/hermes-discord-plugin#46",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "positive-existing-equivalent",
+              "subject": "workflow",
+              "predicate": "workflow.existing_equivalent_surface",
+              "value": false,
+              "source": "github:cheong-yi/hermes-discord-plugin#46",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "positive-inert-trial",
+              "subject": "workflow",
+              "predicate": "workflow.inert_trial_available",
+              "value": true,
+              "source": "github:cheong-yi/hermes-discord-plugin#46",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "positive-target-scope",
+              "subject": "target",
+              "predicate": "target.scope",
+              "value": "hermes_static_source",
+              "source": "github:cheong-yi/hermes-discord-plugin#46",
+              "proof_status": "verified"
+            }
+          ]
+        },
+        "unknowns": []
+      },
+      "expected": {
+        "route_outcome": "adopt_now",
+        "gate_status": "pass",
+        "operator_result": "non_null",
+        "minimal_safe_path": "present",
+        "oracle": {"required": false, "ran": false, "reason": "not_required"}
+      }
+    },
+    {
+      "id": "RAW-AMBIGUOUS",
+      "raw_request": {
+        "schema_version": "rerg-raw-candidate-request/v1",
+        "artifact_type": "raw-candidate-request",
+        "request_id": "raw-ambiguous-note",
+        "candidate": {
+          "source_kind": "note",
+          "source_locator": "fixture:ambiguous-note",
+          "inline_content": "Consider adopting this tool."
+        },
+        "adoption_question": "Should we adopt this candidate?",
+        "captured_at": "2026-07-17T15:00:00Z",
+        "max_age_seconds": 86400,
+        "target": "hermes-static"
+      },
+      "reader_output": {
+        "status": "partial",
+        "source_locator": "fixture:ambiguous-note",
+        "captured_at": "2026-07-17T15:00:00Z",
+        "content_sha256": "sha256:56be20dd2c99bfcc35f7add055ddaefd6d845b910de1816059c863dd7d02ed34",
+        "evidence": {
+          "schema_version": "rerg/v1",
+          "artifact_type": "evidence",
+          "can_execute": false,
+          "mutation": {"mode": "inert"},
+          "transport": {"mode": "inert"},
+          "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+          "evidence_id": "evidence-raw-ambiguous-note",
+          "candidate_id": "raw-ambiguous-note",
+          "facts": [
+            {
+              "observation_id": "ambiguous-candidate-form",
+              "subject": "candidate",
+              "predicate": "candidate.form",
+              "value": "unknown",
+              "source": "fixture:ambiguous-note",
+              "proof_status": "unverified"
+            },
+            {
+              "observation_id": "ambiguous-missing-surface",
+              "subject": "workflow",
+              "predicate": "workflow.missing_surface",
+              "value": "unknown",
+              "source": "fixture:ambiguous-note",
+              "proof_status": "unverified"
+            },
+            {
+              "observation_id": "ambiguous-target-scope",
+              "subject": "target",
+              "predicate": "target.scope",
+              "value": "unknown",
+              "source": "fixture:ambiguous-note",
+              "proof_status": "unverified"
+            }
+          ]
+        },
+        "unknowns": ["candidate_capabilities_unknown", "workflow_gap_unverified"]
+      },
+      "expected": {
+        "route_outcome": "needs_more_facts",
+        "gate_status": "needs_more_facts",
+        "operator_result": "null",
+        "minimal_safe_path": "absent",
+        "oracle": {"required": false, "ran": false, "reason": "not_required"}
+      }
+    },
+    {
+      "id": "RAW-UNSUPPORTED",
+      "raw_request": {
+        "schema_version": "rerg-raw-candidate-request/v1",
+        "artifact_type": "raw-candidate-request",
+        "request_id": "raw-unsupported-firmware",
+        "candidate": {
+          "source_kind": "note",
+          "source_locator": "fixture:outside-hermes-coverage",
+          "inline_content": "Adopt a medical-device firmware flasher as a Hermes workflow primitive."
+        },
+        "adoption_question": "Should Hermes adopt this candidate?",
+        "captured_at": "2026-07-17T15:00:00Z",
+        "max_age_seconds": 86400,
+        "target": "hermes-static"
+      },
+      "reader_output": {
+        "status": "verified",
+        "source_locator": "fixture:outside-hermes-coverage",
+        "captured_at": "2026-07-17T15:00:00Z",
+        "content_sha256": "sha256:76de4e8ec294613871fab1a8cef40571c62a1b6a5b1f02e1bd6a6e27050f19d9",
+        "evidence": {
+          "schema_version": "rerg/v1",
+          "artifact_type": "evidence",
+          "can_execute": false,
+          "mutation": {"mode": "inert"},
+          "transport": {"mode": "inert"},
+          "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+          "evidence_id": "evidence-raw-unsupported-firmware",
+          "candidate_id": "raw-unsupported-firmware",
+          "facts": [
+            {
+              "observation_id": "unsupported-candidate-form",
+              "subject": "candidate",
+              "predicate": "candidate.form",
+              "value": "external_tool_service",
+              "source": "fixture:outside-hermes-coverage",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "unsupported-missing-surface",
+              "subject": "workflow",
+              "predicate": "workflow.missing_surface",
+              "value": true,
+              "source": "fixture:outside-hermes-coverage",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "unsupported-target-scope",
+              "subject": "target",
+              "predicate": "target.scope",
+              "value": "outside_coverage",
+              "source": "fixture:outside-hermes-coverage",
+              "proof_status": "verified"
+            }
+          ]
+        },
+        "unknowns": []
+      },
+      "expected": {
+        "route_outcome": "reject",
+        "gate_status": "fail",
+        "operator_result": "null",
+        "minimal_safe_path": "absent",
+        "oracle": {"required": false, "ran": false, "reason": "not_required"}
+      }
+    },
+    {
+      "id": "RAW-HIGH-RISK",
+      "raw_request": {
+        "schema_version": "rerg-raw-candidate-request/v1",
+        "artifact_type": "raw-candidate-request",
+        "request_id": "raw-high-risk-control-plane",
+        "candidate": {
+          "source_kind": "note",
+          "source_locator": "fixture:high-risk-control-plane",
+          "inline_content": "Install a persistent Hermes hook that mutates live profile configuration and contacts an external service."
+        },
+        "adoption_question": "Should Hermes adopt this control-plane candidate?",
+        "captured_at": "2026-07-17T15:00:00Z",
+        "max_age_seconds": 86400,
+        "target": "hermes-static"
+      },
+      "reader_output": {
+        "status": "verified",
+        "source_locator": "fixture:high-risk-control-plane",
+        "captured_at": "2026-07-17T15:00:00Z",
+        "content_sha256": "sha256:160403486beb5b9220a3ef4ddf5745725d0af3a1202d9530b662b9c183bcc397",
+        "evidence": {
+          "schema_version": "rerg/v1",
+          "artifact_type": "evidence",
+          "can_execute": false,
+          "mutation": {"mode": "inert"},
+          "transport": {"mode": "inert"},
+          "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+          "evidence_id": "evidence-raw-high-risk-control-plane",
+          "candidate_id": "raw-high-risk-control-plane",
+          "facts": [
+            {
+              "observation_id": "high-risk-candidate-form",
+              "subject": "candidate",
+              "predicate": "candidate.form",
+              "value": "hook",
+              "source": "fixture:high-risk-control-plane",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "high-risk-missing-surface",
+              "subject": "workflow",
+              "predicate": "workflow.missing_surface",
+              "value": true,
+              "source": "fixture:high-risk-control-plane",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "high-risk-target-scope",
+              "subject": "target",
+              "predicate": "target.scope",
+              "value": "hermes_static_source",
+              "source": "fixture:high-risk-control-plane",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "high-risk-network",
+              "subject": "risk",
+              "predicate": "risk.network_api_contact",
+              "value": true,
+              "source": "fixture:high-risk-control-plane",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "high-risk-persistent",
+              "subject": "risk",
+              "predicate": "risk.persistent_state",
+              "value": true,
+              "source": "fixture:high-risk-control-plane",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "high-risk-config-write",
+              "subject": "risk",
+              "predicate": "risk.repository_or_profile_config_write",
+              "value": true,
+              "source": "fixture:high-risk-control-plane",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "high-risk-control-plane",
+              "subject": "risk",
+              "predicate": "risk.control_plane_change",
+              "value": true,
+              "source": "fixture:high-risk-control-plane",
+              "proof_status": "verified"
+            }
+          ]
+        },
+        "unknowns": []
+      },
+      "expected": {
+        "route_outcome": "needs_more_facts",
+        "gate_status": "needs_more_facts",
+        "operator_result": "null",
+        "minimal_safe_path": "absent",
+        "oracle": {"required": true, "ran": false, "reason": "high_risk_or_control_plane"}
+      }
+    },
+    {
+      "id": "RAW-NO-GAP",
+      "raw_request": {
+        "schema_version": "rerg-raw-candidate-request/v1",
+        "artifact_type": "raw-candidate-request",
+        "request_id": "raw-no-gap-operator-doc",
+        "candidate": {
+          "source_kind": "repository_path",
+          "source_locator": "docs/rerg-operator-dogfood.md",
+          "inline_content": null
+        },
+        "adoption_question": "Should we adopt another structured operator proof when this surface is already complete?",
+        "captured_at": "2026-07-17T15:00:00Z",
+        "max_age_seconds": 86400,
+        "target": "hermes-static"
+      },
+      "reader_output": {
+        "status": "verified",
+        "source_locator": "docs/rerg-operator-dogfood.md",
+        "captured_at": "2026-07-17T15:00:00Z",
+        "content_sha256": "sha256:5be9233418a00dc7fb6fb624347e2e443d22ccd08fd85a81814e5f3589532b16",
+        "evidence": {
+          "schema_version": "rerg/v1",
+          "artifact_type": "evidence",
+          "can_execute": false,
+          "mutation": {"mode": "inert"},
+          "transport": {"mode": "inert"},
+          "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+          "evidence_id": "evidence-raw-no-gap-operator-doc",
+          "candidate_id": "raw-no-gap-operator-doc",
+          "facts": [
+            {
+              "observation_id": "no-gap-candidate-form",
+              "subject": "candidate",
+              "predicate": "candidate.form",
+              "value": "plugin",
+              "source": "docs/rerg-operator-dogfood.md",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "no-gap-missing-surface",
+              "subject": "workflow",
+              "predicate": "workflow.missing_surface",
+              "value": false,
+              "source": "docs/rerg-operator-dogfood.md",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "no-gap-existing-equivalent",
+              "subject": "workflow",
+              "predicate": "workflow.existing_equivalent_surface",
+              "value": true,
+              "source": "docs/rerg-operator-dogfood.md",
+              "proof_status": "verified"
+            },
+            {
+              "observation_id": "no-gap-target-scope",
+              "subject": "target",
+              "predicate": "target.scope",
+              "value": "existing_operator_surface",
+              "source": "docs/rerg-operator-dogfood.md",
+              "proof_status": "verified"
+            }
+          ]
+        },
+        "unknowns": []
+      },
+      "expected": {
+        "route_outcome": "defer",
+        "gate_status": "pass",
+        "operator_result": "null",
+        "minimal_safe_path": "absent",
+        "oracle": {"required": false, "ran": false, "reason": "not_required"}
+      }
+    }
+  ]
+}

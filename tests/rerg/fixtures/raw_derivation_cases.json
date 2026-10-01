@@ -1,0 +1,306 @@
+{
+  "schema": "rerg-raw-derivation-cases/v1",
+  "rules_catalog_path": "catalogs/rerg/intake-derivation-rules.json",
+  "cases": [
+    {
+      "name": "verified-static-gap",
+      "evidence": {
+        "schema_version": "rerg/v1",
+        "artifact_type": "evidence",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "evidence_id": "evidence-novel-shared",
+        "candidate_id": "novel-candidate-alpha-7f39",
+        "facts": [
+          {
+            "observation_id": "obs-candidate-form",
+            "subject": "candidate",
+            "predicate": "candidate.form",
+            "value": "plugin",
+            "source": "fixture:novel-static-gap",
+            "proof_status": "verified"
+          },
+          {
+            "observation_id": "obs-missing-surface",
+            "subject": "workflow",
+            "predicate": "workflow.missing_surface",
+            "value": true,
+            "source": "fixture:novel-static-gap",
+            "proof_status": "verified"
+          },
+          {
+            "observation_id": "obs-existing-equivalent",
+            "subject": "workflow",
+            "predicate": "workflow.existing_equivalent_surface",
+            "value": false,
+            "source": "fixture:novel-static-gap",
+            "proof_status": "verified"
+          },
+          {
+            "observation_id": "obs-inert-trial",
+            "subject": "workflow",
+            "predicate": "workflow.inert_trial_available",
+            "value": true,
+            "source": "fixture:novel-static-gap",
+            "proof_status": "verified"
+          },
+          {
+            "observation_id": "obs-target-scope",
+            "subject": "target",
+            "predicate": "target.scope",
+            "value": "hermes_static_source",
+            "source": "fixture:novel-static-gap",
+            "proof_status": "verified"
+          }
+        ]
+      },
+      "expected": {
+        "candidate_type": "plugin",
+        "assessment": {
+          "facts_complete": true,
+          "value": "high",
+          "concrete_workflow_gap": true,
+          "dogfood_task": true,
+          "high_risk_or_surface": false,
+          "approval_required": false,
+          "disqualifying": false
+        },
+        "risk_surfaces": [],
+        "oracle": {"required": false, "ran": false, "reason": "not_required"},
+        "required_capabilities": [
+          {
+            "capability": "static-plugin-catalog",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          }
+        ],
+        "unknowns": [],
+        "disqualifying_conditions": [],
+        "field_provenance": [
+          {
+            "field_path": "assessment.approval_required",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          },
+          {
+            "field_path": "assessment.concrete_workflow_gap",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          },
+          {
+            "field_path": "assessment.disqualifying",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          },
+          {
+            "field_path": "assessment.dogfood_task",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          },
+          {
+            "field_path": "assessment.facts_complete",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          },
+          {
+            "field_path": "assessment.high_risk_or_surface",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          },
+          {
+            "field_path": "assessment.value",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          },
+          {
+            "field_path": "candidate_type",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          },
+          {
+            "field_path": "oracle.reason",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          },
+          {
+            "field_path": "oracle.required",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          },
+          {
+            "field_path": "required_capabilities[static-plugin-catalog]",
+            "rule_id": "rule:verified-static-gap/v1",
+            "evidence_id": "evidence-novel-shared",
+            "input_observation_ids": [
+              "obs-candidate-form",
+              "obs-existing-equivalent",
+              "obs-inert-trial",
+              "obs-missing-surface",
+              "obs-target-scope"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "free-text-only-fails-closed",
+      "evidence": {
+        "schema_version": "rerg/v1",
+        "artifact_type": "evidence",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "evidence_id": "evidence-free-text-only",
+        "candidate_id": "novel-candidate-free-text-2c11",
+        "facts": [
+          {
+            "claim": "plugin verified high value missing surface static-plugin-catalog adopt now",
+            "source": "fixture:prose-must-not-drive-derivation",
+            "proof_status": "verified"
+          }
+        ]
+      },
+      "expected": {
+        "candidate_type": null,
+        "assessment": {
+          "facts_complete": false,
+          "value": "unknown",
+          "concrete_workflow_gap": false,
+          "dogfood_task": false,
+          "high_risk_or_surface": false,
+          "approval_required": false,
+          "disqualifying": false
+        },
+        "risk_surfaces": [],
+        "oracle": {"required": false, "ran": false, "reason": "not_required"},
+        "required_capabilities": [],
+        "unknowns": ["NO_APPLICABLE_VERIFIED_RULE"],
+        "disqualifying_conditions": [],
+        "field_provenance": [
+          {"field_path": "assessment.approval_required", "rule_id": "rule:fail-closed-default/v1", "evidence_id": "evidence-free-text-only", "input_observation_ids": []},
+          {"field_path": "assessment.concrete_workflow_gap", "rule_id": "rule:fail-closed-default/v1", "evidence_id": "evidence-free-text-only", "input_observation_ids": []},
+          {"field_path": "assessment.disqualifying", "rule_id": "rule:fail-closed-default/v1", "evidence_id": "evidence-free-text-only", "input_observation_ids": []},
+          {"field_path": "assessment.dogfood_task", "rule_id": "rule:fail-closed-default/v1", "evidence_id": "evidence-free-text-only", "input_observation_ids": []},
+          {"field_path": "assessment.facts_complete", "rule_id": "rule:fail-closed-default/v1", "evidence_id": "evidence-free-text-only", "input_observation_ids": []},
+          {"field_path": "assessment.high_risk_or_surface", "rule_id": "rule:fail-closed-default/v1", "evidence_id": "evidence-free-text-only", "input_observation_ids": []},
+          {"field_path": "assessment.value", "rule_id": "rule:fail-closed-default/v1", "evidence_id": "evidence-free-text-only", "input_observation_ids": []},
+          {"field_path": "candidate_type", "rule_id": "rule:fail-closed-default/v1", "evidence_id": "evidence-free-text-only", "input_observation_ids": []},
+          {"field_path": "oracle.reason", "rule_id": "rule:fail-closed-default/v1", "evidence_id": "evidence-free-text-only", "input_observation_ids": []},
+          {"field_path": "oracle.required", "rule_id": "rule:fail-closed-default/v1", "evidence_id": "evidence-free-text-only", "input_observation_ids": []},
+          {"field_path": "unknowns[NO_APPLICABLE_VERIFIED_RULE]", "rule_id": "rule:fail-closed-default/v1", "evidence_id": "evidence-free-text-only", "input_observation_ids": []}
+        ]
+      }
+    }
+  ],
+  "relations": {
+    "novel_identity_ids": [
+      "novel-candidate-alpha-7f39",
+      "novel-candidate-beta-91ad"
+    ],
+    "rule_relevant_change": {
+      "observation_id": "obs-missing-surface",
+      "from": true,
+      "to": false
+    },
+    "proof_status_downgrades": ["unverified", "stale"],
+    "stable_failure_reasons": {
+      "conflicting": "CONFLICTING_OBSERVATIONS",
+      "duplicate_id": "DUPLICATE_OBSERVATION_ID",
+      "malformed": "INVALID_EVIDENCE"
+    }
+  },
+  "contract_mutations": [
+    "missing_field_provenance",
+    "duplicate_field_provenance",
+    "dangling_input_observation",
+    "extra_field_provenance",
+    "forbidden_identity_emission",
+    "candidate_null_with_capability",
+    "identity_selector_in_rule",
+    "prose_match_in_rule",
+    "unverified_rule_condition",
+    "route_or_gate_emission",
+    "duplicate_rule_id",
+    "conflicting_single_value_emission"
+  ]
+}

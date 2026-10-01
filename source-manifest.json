@@ -1,0 +1,308 @@
+{
+  "source_repository": "cheong-yi/hermes-discord-plugin",
+  "source_commit": "0e2d3bdcf3f08d8701bd58ab98fc72af8af3fe53",
+  "canonical_issue": 46,
+  "issue_updated_at": "2026-09-21T10:18:15Z",
+  "kind": "additive_local_extraction_not_consumer_cutover",
+  "files": [
+    {
+      "source": "plugins/rerg/rerg/__init__.py",
+      "destination": "rerg/__init__.py",
+      "source_sha256": "eebd77f0849c2bd49d0088e33633ed1467855af8859c00ff14158934b726d0c0"
+    },
+    {
+      "source": "plugins/rerg/rerg/__main__.py",
+      "destination": "rerg/__main__.py",
+      "source_sha256": "150a6cbf0a21ec74cc18bdaab058c81037cb2822420a357efd3d7975c1a5e518"
+    },
+    {
+      "source": "plugins/rerg/rerg/git_worktree_inventory.py",
+      "destination": "rerg/git_worktree_inventory.py",
+      "source_sha256": "e71bba06022e26a3d29b09dc750e99d806b5939783f19c7b585693ac3e97875b"
+    },
+    {
+      "source": "plugins/rerg/rerg/path_query.py",
+      "destination": "rerg/path_query.py",
+      "source_sha256": "7ee0c5609d078fa343f8f09893d8f7bd90919a6bfc85b1a85ddd1633f7a7c5f5"
+    },
+    {
+      "source": "plugins/rerg/rerg/raw_cli.py",
+      "destination": "rerg/raw_cli.py",
+      "source_sha256": "f1e99e265049c3d4990c9ef99037218f930428bc60d8b98687a36e301b990f48"
+    },
+    {
+      "source": "plugins/rerg/rerg/raw_derivation.py",
+      "destination": "rerg/raw_derivation.py",
+      "source_sha256": "6e5c52c48a96c68c0fbff4aa422981ab939911c0d37ef7d89d2a8e21fd9b0e5f"
+    },
+    {
+      "source": "plugins/rerg/rerg/raw_intake.py",
+      "destination": "rerg/raw_intake.py",
+      "source_sha256": "985bf8e67c9e3a55ddc33d2c66be55a697adaaaba9fac7850c446a81cc414022"
+    },
+    {
+      "source": "plugins/rerg/rerg/render.py",
+      "destination": "rerg/render.py",
+      "source_sha256": "a03b5408fe6ff5c9b42457a253a9d320c0afdae55336460ac206cf38165c160f"
+    },
+    {
+      "source": "plugins/rerg/rerg/repository_target_adapter.py",
+      "destination": "rerg/repository_target_adapter.py",
+      "source_sha256": "c8433a21b9cf2ec90e1875682aec93c94f97c193d834a277a62e8668c7957694"
+    },
+    {
+      "source": "plugins/rerg/rerg/safe_path.py",
+      "destination": "rerg/safe_path.py",
+      "source_sha256": "78d41791f33f511418c0a693179e8f3b6f576afb443772fbaea6c644e2c81fe6"
+    },
+    {
+      "source": "plugins/rerg/rerg/source_parser.py",
+      "destination": "rerg/source_parser.py",
+      "source_sha256": "1faaf826a0cbe0428a6e716dd12bc3b0921b817ae1ab4cf8a9d5a174e2812c96"
+    },
+    {
+      "source": "plugins/rerg/rerg/workspace_scan.py",
+      "destination": "rerg/workspace_scan.py",
+      "source_sha256": "332791b528a87c1ed1cf610412f533e5286195ad1ae23be4ae36a53df6cc2c99"
+    },
+    {
+      "source": "tests/rerg/fixtures/capability_path_graph_cases.json",
+      "destination": "tests/rerg/fixtures/capability_path_graph_cases.json",
+      "source_sha256": "c28b65e633f31a3b07a27748d3930affe97e0764685dea87c735a92083efaa07"
+    },
+    {
+      "source": "tests/rerg/fixtures/contract_cases.json",
+      "destination": "tests/rerg/fixtures/contract_cases.json",
+      "source_sha256": "a929dbee56cd88ff4e17c4d296c1a879769b358ea211462ee65a164b688f02c6"
+    },
+    {
+      "source": "tests/rerg/fixtures/decision_cases.json",
+      "destination": "tests/rerg/fixtures/decision_cases.json",
+      "source_sha256": "a8f0854dc374ea68f8d99bb41297d5ae3c438c430ed9de847b775747be12e196"
+    },
+    {
+      "source": "tests/rerg/fixtures/dependency_discovery_cases.json",
+      "destination": "tests/rerg/fixtures/dependency_discovery_cases.json",
+      "source_sha256": "3ba27bf1fd14ea6322af4d88bcd74708f7450b1ff2e69839a4c4490e221c2079"
+    },
+    {
+      "source": "tests/rerg/fixtures/hermes_adapter_cases.json",
+      "destination": "tests/rerg/fixtures/hermes_adapter_cases.json",
+      "source_sha256": "5038def91e2ad0defd4fa62971af5854d22e43c3cfc65cd9e3092671cda9e3b9"
+    },
+    {
+      "source": "tests/rerg/fixtures/operator_contract_cases.json",
+      "destination": "tests/rerg/fixtures/operator_contract_cases.json",
+      "source_sha256": "366cdbb93acf402ee1c51d31a07832f626c8c44a3ff5c43fdf44c8db8a9949ad"
+    },
+    {
+      "source": "tests/rerg/fixtures/operator_dogfood_expected.yaml",
+      "destination": "tests/rerg/fixtures/operator_dogfood_expected.yaml",
+      "source_sha256": "916235e38474d3fa270d9ad286dba0fdd3521a4a8d61720d48f175657872f5ad"
+    },
+    {
+      "source": "tests/rerg/fixtures/operator_dogfood_request.json",
+      "destination": "tests/rerg/fixtures/operator_dogfood_request.json",
+      "source_sha256": "cfb996377eb1b4455430eb728134e0d75c1004ec14b82b6d7c6ec31dff25ee24"
+    },
+    {
+      "source": "tests/rerg/fixtures/operator_surface_cases.json",
+      "destination": "tests/rerg/fixtures/operator_surface_cases.json",
+      "source_sha256": "d686a8c9335a9d86bfb84408323d3fc36966d076b3baa13d47ff79adf638f47e"
+    },
+    {
+      "source": "tests/rerg/fixtures/output_cases.json",
+      "destination": "tests/rerg/fixtures/output_cases.json",
+      "source_sha256": "57b858fd58cf86b696c689a8f1fa4aebcfef4db110feec3dfbdc9acf46f36619"
+    },
+    {
+      "source": "tests/rerg/fixtures/primitive_map_contract_cases.json",
+      "destination": "tests/rerg/fixtures/primitive_map_contract_cases.json",
+      "source_sha256": "a7e93db5d56cb8bb8c1fb1eff5fc5a6903cc806d8acfd389025e22cb54f73245"
+    },
+    {
+      "source": "tests/rerg/fixtures/primitive_path_cases.json",
+      "destination": "tests/rerg/fixtures/primitive_path_cases.json",
+      "source_sha256": "18ecdf0f0068e9c329a32d8d38accbeddd73d53f5622f1ccf51910303cfbcf21"
+    },
+    {
+      "source": "tests/rerg/fixtures/raw_candidate_cases.json",
+      "destination": "tests/rerg/fixtures/raw_candidate_cases.json",
+      "source_sha256": "f5fba1e86ae8a8bd2a4b2419a339682f660cd4c1de52b077675b8ffd8f2cac79"
+    },
+    {
+      "source": "tests/rerg/fixtures/raw_derivation_cases.json",
+      "destination": "tests/rerg/fixtures/raw_derivation_cases.json",
+      "source_sha256": "e14729d4295bff1594b3fcaff74edf1700ba61309ca5b65d5fce6e7a4d56f06d"
+    },
+    {
+      "source": "tests/rerg/fixtures/raw_recovery_cases.json",
+      "destination": "tests/rerg/fixtures/raw_recovery_cases.json",
+      "source_sha256": "8dff542e0c38759c3459bab119e77eb60a0737869d0b49b90d1db4e83cfc3e1d"
+    },
+    {
+      "source": "tests/rerg/fixtures/workspace_scan_cases.json",
+      "destination": "tests/rerg/fixtures/workspace_scan_cases.json",
+      "source_sha256": "27b7cd7a92e9c195231c69d5b4ab7abba6167f1b0f69a51affc78ced78467f7c"
+    },
+    {
+      "source": "tests/rerg/test_admission_boundary.py",
+      "destination": "tests/rerg/test_admission_boundary.py",
+      "source_sha256": "db73379359ac0d46095f40d1beb500f28b5a270eca96f3107890543cbdb3913a"
+    },
+    {
+      "source": "tests/rerg/test_admission_ownership.py",
+      "destination": "tests/rerg/test_admission_ownership.py",
+      "source_sha256": "36e55b7450858fda067144736b209125c7fa0c0017f94c83ebac3c371f90dcf2"
+    },
+    {
+      "source": "tests/rerg/test_engine.py",
+      "destination": "tests/rerg/test_engine.py",
+      "source_sha256": "edb003aa1c88d606cc94f5468384bbf4f5a082766901faa84a88d19af0430ddb"
+    },
+    {
+      "source": "tests/rerg/test_git_worktree_inventory.py",
+      "destination": "tests/rerg/test_git_worktree_inventory.py",
+      "source_sha256": "562886b9eb97de133dc4e52b2457086432c800b6159baf4e65227ba3017746a8"
+    },
+    {
+      "source": "tests/rerg/test_host_workflow.py",
+      "destination": "tests/rerg/test_host_workflow.py",
+      "source_sha256": "5bb494219d30bb1f41224f23db43f58a4d5e5913fc9940bc81fa443486a56849"
+    },
+    {
+      "source": "tests/rerg/test_output.py",
+      "destination": "tests/rerg/test_output.py",
+      "source_sha256": "9b6fe5bef922a684eb4eeb7bf54ad2b6eeea59ebc994f4b0dea5b49b63070dd0"
+    },
+    {
+      "source": "tests/rerg/test_percent_decoder.py",
+      "destination": "tests/rerg/test_percent_decoder.py",
+      "source_sha256": "02c6afc75cc172d27d28645f99942abf92dbb0a50c7754d61a3fc266e619bd08"
+    },
+    {
+      "source": "tests/rerg/test_raw_candidate_intake.py",
+      "destination": "tests/rerg/test_raw_candidate_intake.py",
+      "source_sha256": "3b243ef253ef5f2508bce94fc2f52680bdb78770a83d579e1d08e4e748831c06"
+    },
+    {
+      "source": "tests/rerg/test_raw_cli.py",
+      "destination": "tests/rerg/test_raw_cli.py",
+      "source_sha256": "c39302ea8778040120d7bf6f5219df5d879d351f4458b473e0769d322ff40938"
+    },
+    {
+      "source": "tests/rerg/test_raw_derivation_contract.py",
+      "destination": "tests/rerg/test_raw_derivation_contract.py",
+      "source_sha256": "8b4df2ed4cf7429435e35fc869346a89b08e428eef090a61d83b8790a0457868"
+    },
+    {
+      "source": "tests/rerg/test_raw_recovery.py",
+      "destination": "tests/rerg/test_raw_recovery.py",
+      "source_sha256": "d093d37c8effc8efc18ec51a50de5f1e8aa719eab013ae066767fadfe7a9f141"
+    },
+    {
+      "source": "tests/rerg/test_repository_target_adapter.py",
+      "destination": "tests/rerg/test_repository_target_adapter.py",
+      "source_sha256": "1c12c89a25d3c31c5030289bfdd8eb0684f3640dee204d68c6e74d207bb5cef0"
+    },
+    {
+      "source": "tests/rerg/test_runtime_replacement.py",
+      "destination": "tests/rerg/test_runtime_replacement.py",
+      "source_sha256": "330fcd57d0cddbad5bc5b33adf35f53a5a3a1802406447272e1580ec01f6f0ed"
+    },
+    {
+      "source": "tests/rerg/test_source_parser.py",
+      "destination": "tests/rerg/test_source_parser.py",
+      "source_sha256": "dd7736d16de3f344a192599d3c888583f26f8164301d0b9a19f3621e6aaeb515"
+    },
+    {
+      "source": "tests/rerg/test_supplied_admission.py",
+      "destination": "tests/rerg/test_supplied_admission.py",
+      "source_sha256": "3c35b7700af654c26571281cd6f35fdc0ff9065eca4c7f1b4f58d56d5f876195"
+    },
+    {
+      "source": "tests/rerg/test_workspace_scan.py",
+      "destination": "tests/rerg/test_workspace_scan.py",
+      "source_sha256": "2f3fd070629f7804b28c82dda356b22257c89319e2bbbf8dd3142a6a3728bcd3"
+    },
+    {
+      "source": "schemas/rerg/authority-risk.schema.json",
+      "destination": "schemas/rerg/authority-risk.schema.json",
+      "source_sha256": "d121f21a1a14fb834a7b36b62c3e39cf5ad538a7419487cc207989e0543afdaf"
+    },
+    {
+      "source": "schemas/rerg/candidate.schema.json",
+      "destination": "schemas/rerg/candidate.schema.json",
+      "source_sha256": "7e10a1507b911d6121d58107dca6665e3db72a16968376237b6c1f227fcd8e1e"
+    },
+    {
+      "source": "schemas/rerg/capability-path-graph.schema.json",
+      "destination": "schemas/rerg/capability-path-graph.schema.json",
+      "source_sha256": "8ea92eb1e121d11c8dcf807883880c16d565169f7788f7231c4e1b29ec7b3364"
+    },
+    {
+      "source": "schemas/rerg/evidence.schema.json",
+      "destination": "schemas/rerg/evidence.schema.json",
+      "source_sha256": "e6c854bc1949a2e876908f0f3706ddf1a661171da4681356fe07b1af3967471b"
+    },
+    {
+      "source": "schemas/rerg/graph.schema.json",
+      "destination": "schemas/rerg/graph.schema.json",
+      "source_sha256": "de7bcf9edb81c46d4b2169a93d453537dfd7a05152ac8b181ab10a10553f973c"
+    },
+    {
+      "source": "schemas/rerg/intake-derivation-rules.schema.json",
+      "destination": "schemas/rerg/intake-derivation-rules.schema.json",
+      "source_sha256": "d03640f5ea9d58493a2910d7dfd676056c725615014b84206acbe5b87d4fdeef"
+    },
+    {
+      "source": "schemas/rerg/operator-request.schema.json",
+      "destination": "schemas/rerg/operator-request.schema.json",
+      "source_sha256": "806be2328f3b8d7b0bf3125c2fbb2c6e1f678a1f35cac74a1375a71516714c06"
+    },
+    {
+      "source": "schemas/rerg/operator-result.schema.json",
+      "destination": "schemas/rerg/operator-result.schema.json",
+      "source_sha256": "da2dd22ac8268eb70500186899985a37698d243c1274139b9574e3f775a20b6d"
+    },
+    {
+      "source": "schemas/rerg/primitive-map.schema.json",
+      "destination": "schemas/rerg/primitive-map.schema.json",
+      "source_sha256": "4b2e38d45ffcebe3da7ef30a738dcc788629866a9c713c5a3ec8d7ca98444f3d"
+    },
+    {
+      "source": "schemas/rerg/recommendation.schema.json",
+      "destination": "schemas/rerg/recommendation.schema.json",
+      "source_sha256": "51688f6c7ca1c14a08f1102706e43c077fd6755aec08a4682dc1b4613d41cfe6"
+    },
+    {
+      "source": "schemas/rerg/result.schema.json",
+      "destination": "schemas/rerg/result.schema.json",
+      "source_sha256": "81835f388ceaaca6c591b0e6e7b7044bad6e7638a0cb2eab45c93c85befb1d7f"
+    },
+    {
+      "source": "skills/rerg/SKILL.md",
+      "destination": "skills/rerg/SKILL.md",
+      "source_sha256": "64b1c14355fe6be0b249fa2c6401543d37872a70c7c5f2ecf595cf19674d3faf"
+    },
+    {
+      "source": "docs/rerg-adoption-workflow.md",
+      "destination": "docs/rerg-adoption-workflow.md",
+      "source_sha256": "49efa60593bcee2efb50333e6045001e53339734c5b92c5c095f3b7bc267c8b6"
+    },
+
+    {
+      "source": "requirements-rerg-parser.lock",
+      "destination": "requirements-rerg-parser.lock",
+      "source_sha256": "e0aa898ac5992be16a76c399f2bf7ed724cae83310be69dc2c7993288ef3016d"
+    }
+  ],
+  "excluded": [
+    "plugins/rerg/__init__.py",
+    "plugins/rerg/rerg_plugin.py",
+    "plugins/rerg/plugin.yaml",
+    "tests/rerg/test_hermes_rerg_plugin.py",
+    "tests/rerg/test_hermes_rerg_skill.py"
+  ],
+  "claim_ceiling": "byte predicates only; not semantics, runtime behavior, authenticity, or arbitrary-harness portability"
+}

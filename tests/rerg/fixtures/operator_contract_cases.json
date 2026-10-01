@@ -1,0 +1,89 @@
+{
+  "suite": "rerg-operator-v1-contracts",
+  "valid_request": {
+    "schema_version": "rerg-operator-request/v1",
+    "artifact_type": "operator-request",
+    "candidate": {
+      "schema_version": "rerg/v1",
+      "artifact_type": "candidate",
+      "can_execute": false,
+      "mutation": {"mode": "inert"},
+      "transport": {"mode": "inert"},
+      "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+      "candidate_id": "candidate-session-kickoff",
+      "candidate_type": "plugin",
+      "title": "Session kickoff continuation",
+      "summary": "A repository-owned inert candidate."
+    },
+    "catalog_id": "hermes-static-source:session-kickoff/v1",
+    "catalog_path": "catalogs/rerg/hermes-static-source.json",
+    "catalog_sha256": "sha256:04d766dd6ef4e2b15c918ca508d5a018ed7a019e07550d64a1d4629551e2c34d",
+    "evaluated_at": "2026-07-13T00:00:00Z",
+    "max_age_seconds": 86400,
+    "target": "hermes-static",
+    "required_capabilities": ["tool:discord_session_kickoff_goal_continuation_validator"],
+    "path_candidates": [
+      {
+        "rank": 1,
+        "path": "examples/rerg/portable-primitive-map-proof.json",
+        "capabilities": ["tool:discord_session_kickoff_goal_continuation_validator"],
+        "recipe": {"kind": "read-only-fixture", "mutation": "inert", "transport": "inert"}
+      }
+    ]
+  },
+  "valid_result": {
+    "schema_version": "rerg-operator-result/v1",
+    "artifact_type": "operator-result",
+    "can_execute": false,
+    "mutation": {"mode": "inert"},
+    "transport": {"mode": "inert"},
+    "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+    "request_id": "candidate-session-kickoff",
+    "candidate_id": "candidate-session-kickoff",
+    "pin": {
+      "catalog_id": "hermes-static-source:session-kickoff/v1",
+      "catalog_path": "catalogs/rerg/hermes-static-source.json",
+      "catalog_sha256": "sha256:04d766dd6ef4e2b15c918ca508d5a018ed7a019e07550d64a1d4629551e2c34d"
+    },
+    "freshness": {
+      "evaluated_at": "2026-07-13T00:00:00Z",
+      "max_age_seconds": 86400,
+      "status": "fresh"
+    },
+    "coverage": {
+      "target": "hermes-static",
+      "required_capabilities": ["tool:discord_session_kickoff_goal_continuation_validator"],
+      "covered_capabilities": ["tool:discord_session_kickoff_goal_continuation_validator"],
+      "unknown_capabilities": []
+    },
+    "unknowns": [],
+    "blockers": [],
+    "downgrade_reasons": [],
+    "actions": [
+      {
+        "rank": 1,
+        "path": "examples/rerg/portable-primitive-map-proof.json",
+        "capabilities": ["tool:discord_session_kickoff_goal_continuation_validator"],
+        "reason": "covered by pinned static catalog",
+        "recipe": {"kind": "read-only-fixture", "mutation": "inert", "transport": "inert"}
+      }
+    ],
+    "minimal_safe_path": "examples/rerg/portable-primitive-map-proof.json",
+    "provenance": {
+      "catalog_id": "hermes-static-source:session-kickoff/v1",
+      "catalog_path": "catalogs/rerg/hermes-static-source.json",
+      "catalog_sha256": "sha256:04d766dd6ef4e2b15c918ca508d5a018ed7a019e07550d64a1d4629551e2c34d"
+    }
+  },
+  "invalid_reasons": {
+    "unknown_request_field": "UNKNOWN_FIELD",
+    "catalog_identity": "CATALOG_ID_MISMATCH",
+    "catalog_digest": "CATALOG_DIGEST_MISMATCH",
+    "stale_request": "STALE_REQUEST",
+    "unsafe_path": "UNSAFE_PATH",
+    "non_inert_recipe": "NON_INERT_RECIPE",
+    "ambiguous_capability": "AMBIGUOUS_CAPABILITY",
+    "unknown_result_field": "UNKNOWN_FIELD",
+    "executable_result": "CAN_EXECUTE_MUST_BE_FALSE"
+  }
+}

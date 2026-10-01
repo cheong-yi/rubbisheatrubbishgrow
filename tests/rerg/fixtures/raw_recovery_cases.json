@@ -1,0 +1,14 @@
+{
+  "target": "hermes-static",
+  "evidence": [
+    {"evidence_id": "ev-target", "source": "repository", "proof_state": "verified", "target": "hermes-static", "captured_at": "2026-09-01T00:00:00Z", "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000"},
+    {"evidence_id": "ev-need", "source": "repository", "proof_state": "verified", "target": "hermes-static", "captured_at": "2026-09-01T00:00:00Z", "content_sha256": "1111111111111111111111111111111111111111111111111111111111111111"}
+  ],
+  "envelope": {
+    "target_harness": {"target": "hermes-static", "evidence_refs": ["ev-target"]},
+    "desired_outcome": {"statement": "inspect a safe local path", "evidence_refs": ["ev-need"]},
+    "observed_claims": [{"claim_kind": "target", "source": "repository", "evidence_refs": ["ev-target"]}],
+    "inferred_needs_constraints": [{"need_id": "need-inspect", "source": "controller", "statement": "read the repository map", "constraints": [], "evidence_refs": ["ev-need"], "confidence": "high", "uncertainty": [], "load_bearing": true, "bounded_scope": "repository"}],
+    "unknowns": []
+  }
+}

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rerg"
+version = "0.1.0"
+description = "Non-authorizing deterministic assessment of supplied source evidence"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+rerg-assess = "rerg.assessment_cli:entrypoint"
+
+[tool.setuptools]
+packages = ["rerg"]
+
+[tool.setuptools.data-files]
+"share/rerg/skills/rerg" = ["skills/rerg/SKILL.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/rerg"]

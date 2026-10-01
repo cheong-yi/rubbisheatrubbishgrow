@@ -1,0 +1,877 @@
+{
+  "valid_catalog": {
+    "catalog_schema_version": "hermes-static-source/v1",
+    "catalog_id": "hermes-static-source:session-kickoff/v1",
+    "adapter_id": "hermes-static-adapter/v1",
+    "source_set_id": "hermes-plugin-source-set:session-kickoff/v1",
+    "observed_at": "2026-07-13T00:00:00Z",
+    "coverage": {
+      "target": "hermes-static",
+      "source_paths": [
+        "plugins/session-courier/plugin.yaml",
+        "plugins/session-courier/tool.py",
+        "plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "plugins/session-kickoff-goal-continuation/tool.py",
+        "plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "plugins/session-kickoff-packet-renderer/tool.py",
+        "plugins/session-kickoff-receipt/plugin.yaml",
+        "plugins/session-kickoff-receipt/tool.py",
+        "plugins/session-kickoff-route-binding/plugin.yaml",
+        "plugins/session-kickoff-route-binding/tool.py"
+      ],
+      "bounded_capabilities": [
+        "source-artifact-binding:plugins/session-courier/plugin.yaml",
+        "source-artifact-binding:plugins/session-courier/tool.py",
+        "source-artifact-binding:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "source-artifact-binding:plugins/session-kickoff-goal-continuation/tool.py",
+        "source-artifact-binding:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "source-artifact-binding:plugins/session-kickoff-packet-renderer/tool.py",
+        "source-artifact-binding:plugins/session-kickoff-receipt/plugin.yaml",
+        "source-artifact-binding:plugins/session-kickoff-receipt/tool.py",
+        "source-artifact-binding:plugins/session-kickoff-route-binding/plugin.yaml",
+        "source-artifact-binding:plugins/session-kickoff-route-binding/tool.py",
+        "tool:discord_session_courier",
+        "handler:handle_discord_session_courier",
+        "input-schema:session-courier:TOOL_SCHEMA",
+        "boundary:session-courier:live_discord_allowed=false",
+        "boundary:session-courier:performs_network=false",
+        "boundary:session-courier:mutates_gateway=false",
+        "boundary:session-courier:mutates_profile_config=false",
+        "boundary:session-courier:installs_into_active_profile=false",
+        "tool:discord_session_kickoff_goal_continuation_validator",
+        "handler:handle_discord_session_kickoff_goal_continuation",
+        "input-schema:session-kickoff-goal-continuation:TOOL_SCHEMA",
+        "tool:discord_session_kickoff_goal_continuation_compact_renderer",
+        "handler:handle_discord_session_kickoff_goal_continuation_compact_renderer",
+        "input-schema:session-kickoff-goal-continuation:RENDERER_TOOL_SCHEMA",
+        "tool:discord_session_kickoff_goal_continuation_prestart_checker",
+        "handler:handle_discord_session_kickoff_goal_continuation_prestart_checker",
+        "input-schema:session-kickoff-goal-continuation:PRESTART_TOOL_SCHEMA",
+        "tool:discord_session_kickoff_seed_card_first_startup",
+        "handler:handle_discord_session_kickoff_seed_card_first_startup",
+        "input-schema:session-kickoff-goal-continuation:SEED_CARD_TOOL_SCHEMA",
+        "boundary:session-kickoff-goal-continuation:live_discord_allowed=false",
+        "boundary:session-kickoff-goal-continuation:performs_network=false",
+        "boundary:session-kickoff-goal-continuation:mutates_gateway=false",
+        "boundary:session-kickoff-goal-continuation:mutates_profile_config=false",
+        "boundary:session-kickoff-goal-continuation:installs_into_active_profile=false",
+        "boundary:session-kickoff-goal-continuation:issue_pr_mutation_allowed=false",
+        "boundary:session-kickoff-goal-continuation:runner_contact_allowed=false",
+        "tool:discord_session_kickoff_packet_renderer",
+        "handler:handle_discord_session_kickoff_packet_renderer",
+        "input-schema:session-kickoff-packet-renderer:TOOL_SCHEMA",
+        "boundary:session-kickoff-packet-renderer:live_discord_allowed=false",
+        "boundary:session-kickoff-packet-renderer:performs_network=false",
+        "boundary:session-kickoff-packet-renderer:mutates_gateway=false",
+        "boundary:session-kickoff-packet-renderer:mutates_profile_config=false",
+        "boundary:session-kickoff-packet-renderer:installs_into_active_profile=false",
+        "tool:discord_session_kickoff_receipt",
+        "handler:handle_discord_session_kickoff_receipt",
+        "input-schema:session-kickoff-receipt:TOOL_SCHEMA",
+        "boundary:session-kickoff-receipt:live_discord_allowed=false",
+        "boundary:session-kickoff-receipt:performs_network=false",
+        "boundary:session-kickoff-receipt:mutates_gateway=false",
+        "boundary:session-kickoff-receipt:mutates_profile_config=false",
+        "boundary:session-kickoff-receipt:installs_into_active_profile=false",
+        "tool:discord_session_kickoff_route_local_approval_guard",
+        "handler:handle_discord_session_kickoff_route_local_approval_guard",
+        "input-schema:session-kickoff-route-binding:TOOL_SCHEMA",
+        "boundary:session-kickoff-route-binding:live_discord_allowed=false",
+        "boundary:session-kickoff-route-binding:performs_network=false",
+        "boundary:session-kickoff-route-binding:mutates_gateway=false",
+        "boundary:session-kickoff-route-binding:mutates_profile_config=false",
+        "boundary:session-kickoff-route-binding:installs_into_active_profile=false",
+        "static-plugin-catalog",
+        "static-tool-catalog",
+        "static-hermes-source-set"
+      ],
+      "unknown_capabilities": [
+        "authorization",
+        "command-execution",
+        "credentials",
+        "dynamic-discovery",
+        "live-state",
+        "network",
+        "plugin-registration",
+        "runtime-availability",
+        "safe-path"
+      ],
+      "unknown_handling": "Absent, optional, unsupported, ambiguous, and outside-coverage capabilities are explicit unknowns or fail closed; absence never implies support.",
+      "limitations": [
+        "Repository-controlled source bytes only; no plugin imports or execution.",
+        "No Hermes runtime, network, credentials, live state, authorization, dispatch, or safe-path claims.",
+        "Static source provenance does not establish runtime availability or execution success."
+      ]
+    },
+    "sources": [
+      {
+        "source_id": "source:plugins/session-courier/plugin.yaml",
+        "path": "plugins/session-courier/plugin.yaml",
+        "sha256": "sha256:15135328849d079af25e492640d45edb9c15e56231619e9d76f7a560ce55e7e7",
+        "observed_at": "2026-07-13T00:00:00Z",
+        "provenance": {
+          "kind": "repository-controlled-source",
+          "basis": "committed source bytes at starting HEAD",
+          "artifact_kind": "plugin.yaml",
+          "fact_scope": "declared plugin metadata and non-live boundaries"
+        }
+      },
+      {
+        "source_id": "source:plugins/session-courier/tool.py",
+        "path": "plugins/session-courier/tool.py",
+        "sha256": "sha256:8f643fa5547dff6950c27aa4d6d02912b29444926c561f4d932d7cdc479017f2",
+        "observed_at": "2026-07-13T00:00:00Z",
+        "provenance": {
+          "kind": "repository-controlled-source",
+          "basis": "committed source bytes at starting HEAD",
+          "artifact_kind": "tool.py",
+          "fact_scope": "source-only handler implementation boundaries"
+        }
+      },
+      {
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "path": "plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "sha256": "sha256:6a846e89ef023ec9e9be1db178f52b4bc6927ccd3e1b1755ffd8fc49a2b8acae",
+        "observed_at": "2026-07-13T00:00:00Z",
+        "provenance": {
+          "kind": "repository-controlled-source",
+          "basis": "committed source bytes at starting HEAD",
+          "artifact_kind": "plugin.yaml",
+          "fact_scope": "declared plugin metadata and non-live boundaries"
+        }
+      },
+      {
+        "source_id": "source:plugins/session-kickoff-goal-continuation/tool.py",
+        "path": "plugins/session-kickoff-goal-continuation/tool.py",
+        "sha256": "sha256:abb27e0e0cb3c34e581023310d154630523a7991c3546a17cb8b33424269acd3",
+        "observed_at": "2026-07-13T00:00:00Z",
+        "provenance": {
+          "kind": "repository-controlled-source",
+          "basis": "committed source bytes at starting HEAD",
+          "artifact_kind": "tool.py",
+          "fact_scope": "source-only handler implementation boundaries"
+        }
+      },
+      {
+        "source_id": "source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "path": "plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "sha256": "sha256:c9118fdce540d7e5405164879bb5572a6a1da25cc63073219e34ffb8c7ea16cc",
+        "observed_at": "2026-07-13T00:00:00Z",
+        "provenance": {
+          "kind": "repository-controlled-source",
+          "basis": "committed source bytes at starting HEAD",
+          "artifact_kind": "plugin.yaml",
+          "fact_scope": "declared plugin metadata and non-live boundaries"
+        }
+      },
+      {
+        "source_id": "source:plugins/session-kickoff-packet-renderer/tool.py",
+        "path": "plugins/session-kickoff-packet-renderer/tool.py",
+        "sha256": "sha256:8b5fe31cb54e611c8bb5f2614579b263b7f2354ee5da4bde34d19e97ff306d11",
+        "observed_at": "2026-07-13T00:00:00Z",
+        "provenance": {
+          "kind": "repository-controlled-source",
+          "basis": "committed source bytes at starting HEAD",
+          "artifact_kind": "tool.py",
+          "fact_scope": "source-only handler implementation boundaries"
+        }
+      },
+      {
+        "source_id": "source:plugins/session-kickoff-receipt/plugin.yaml",
+        "path": "plugins/session-kickoff-receipt/plugin.yaml",
+        "sha256": "sha256:2687e224bd47cae30299f4e8867a3a08eb52f378a1b0faaa1e55acaeb58ad132",
+        "observed_at": "2026-07-13T00:00:00Z",
+        "provenance": {
+          "kind": "repository-controlled-source",
+          "basis": "committed source bytes at starting HEAD",
+          "artifact_kind": "plugin.yaml",
+          "fact_scope": "declared plugin metadata and non-live boundaries"
+        }
+      },
+      {
+        "source_id": "source:plugins/session-kickoff-receipt/tool.py",
+        "path": "plugins/session-kickoff-receipt/tool.py",
+        "sha256": "sha256:90039e475ed2816c0375dc9f765601ddac5f8c8a0b493526fdca7b03b41103b9",
+        "observed_at": "2026-07-13T00:00:00Z",
+        "provenance": {
+          "kind": "repository-controlled-source",
+          "basis": "committed source bytes at starting HEAD",
+          "artifact_kind": "tool.py",
+          "fact_scope": "source-only handler implementation boundaries"
+        }
+      },
+      {
+        "source_id": "source:plugins/session-kickoff-route-binding/plugin.yaml",
+        "path": "plugins/session-kickoff-route-binding/plugin.yaml",
+        "sha256": "sha256:aac4c21bc97cc8d5403a847f7f00e4cab4224364a8381ed9c125b67bdd683ce2",
+        "observed_at": "2026-07-13T00:00:00Z",
+        "provenance": {
+          "kind": "repository-controlled-source",
+          "basis": "committed source bytes at starting HEAD",
+          "artifact_kind": "plugin.yaml",
+          "fact_scope": "declared plugin metadata and non-live boundaries"
+        }
+      },
+      {
+        "source_id": "source:plugins/session-kickoff-route-binding/tool.py",
+        "path": "plugins/session-kickoff-route-binding/tool.py",
+        "sha256": "sha256:554769bedef28201d90795f1e06b57ae8e181b6845e961d0782deccf6e40e9f4",
+        "observed_at": "2026-07-13T00:00:00Z",
+        "provenance": {
+          "kind": "repository-controlled-source",
+          "basis": "committed source bytes at starting HEAD",
+          "artifact_kind": "tool.py",
+          "fact_scope": "source-only handler implementation boundaries"
+        }
+      }
+    ],
+    "facts": [
+      {
+        "fact_id": "fact:source:plugins/session-courier/plugin.yaml",
+        "target": "hermes-static",
+        "capability": "source-artifact-binding:plugins/session-courier/plugin.yaml",
+        "value": true,
+        "source_id": "source:plugins/session-courier/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:source:plugins/session-courier/tool.py",
+        "target": "hermes-static",
+        "capability": "source-artifact-binding:plugins/session-courier/tool.py",
+        "value": true,
+        "source_id": "source:plugins/session-courier/tool.py",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "target": "hermes-static",
+        "capability": "source-artifact-binding:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:source:plugins/session-kickoff-goal-continuation/tool.py",
+        "target": "hermes-static",
+        "capability": "source-artifact-binding:plugins/session-kickoff-goal-continuation/tool.py",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/tool.py",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "target": "hermes-static",
+        "capability": "source-artifact-binding:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:source:plugins/session-kickoff-packet-renderer/tool.py",
+        "target": "hermes-static",
+        "capability": "source-artifact-binding:plugins/session-kickoff-packet-renderer/tool.py",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-packet-renderer/tool.py",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:source:plugins/session-kickoff-receipt/plugin.yaml",
+        "target": "hermes-static",
+        "capability": "source-artifact-binding:plugins/session-kickoff-receipt/plugin.yaml",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-receipt/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:source:plugins/session-kickoff-receipt/tool.py",
+        "target": "hermes-static",
+        "capability": "source-artifact-binding:plugins/session-kickoff-receipt/tool.py",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-receipt/tool.py",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:source:plugins/session-kickoff-route-binding/plugin.yaml",
+        "target": "hermes-static",
+        "capability": "source-artifact-binding:plugins/session-kickoff-route-binding/plugin.yaml",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-route-binding/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:source:plugins/session-kickoff-route-binding/tool.py",
+        "target": "hermes-static",
+        "capability": "source-artifact-binding:plugins/session-kickoff-route-binding/tool.py",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-route-binding/tool.py",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:tool:discord_session_courier",
+        "target": "hermes-static",
+        "capability": "tool:discord_session_courier",
+        "value": true,
+        "source_id": "source:plugins/session-courier/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:handler:handle_discord_session_courier",
+        "target": "hermes-static",
+        "capability": "handler:handle_discord_session_courier",
+        "value": true,
+        "source_id": "source:plugins/session-courier/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:input-schema:session-courier:TOOL_SCHEMA",
+        "target": "hermes-static",
+        "capability": "input-schema:session-courier:TOOL_SCHEMA",
+        "value": true,
+        "source_id": "source:plugins/session-courier/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-courier:live_discord_allowed=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-courier:live_discord_allowed=false",
+        "value": true,
+        "source_id": "source:plugins/session-courier/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-courier:performs_network=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-courier:performs_network=false",
+        "value": true,
+        "source_id": "source:plugins/session-courier/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-courier:mutates_gateway=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-courier:mutates_gateway=false",
+        "value": true,
+        "source_id": "source:plugins/session-courier/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-courier:mutates_profile_config=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-courier:mutates_profile_config=false",
+        "value": true,
+        "source_id": "source:plugins/session-courier/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-courier:installs_into_active_profile=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-courier:installs_into_active_profile=false",
+        "value": true,
+        "source_id": "source:plugins/session-courier/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:tool:discord_session_kickoff_goal_continuation_validator",
+        "target": "hermes-static",
+        "capability": "tool:discord_session_kickoff_goal_continuation_validator",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:handler:handle_discord_session_kickoff_goal_continuation",
+        "target": "hermes-static",
+        "capability": "handler:handle_discord_session_kickoff_goal_continuation",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:input-schema:session-kickoff-goal-continuation:TOOL_SCHEMA",
+        "target": "hermes-static",
+        "capability": "input-schema:session-kickoff-goal-continuation:TOOL_SCHEMA",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:tool:discord_session_kickoff_goal_continuation_compact_renderer",
+        "target": "hermes-static",
+        "capability": "tool:discord_session_kickoff_goal_continuation_compact_renderer",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:handler:handle_discord_session_kickoff_goal_continuation_compact_renderer",
+        "target": "hermes-static",
+        "capability": "handler:handle_discord_session_kickoff_goal_continuation_compact_renderer",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:input-schema:session-kickoff-goal-continuation:RENDERER_TOOL_SCHEMA",
+        "target": "hermes-static",
+        "capability": "input-schema:session-kickoff-goal-continuation:RENDERER_TOOL_SCHEMA",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:tool:discord_session_kickoff_goal_continuation_prestart_checker",
+        "target": "hermes-static",
+        "capability": "tool:discord_session_kickoff_goal_continuation_prestart_checker",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:handler:handle_discord_session_kickoff_goal_continuation_prestart_checker",
+        "target": "hermes-static",
+        "capability": "handler:handle_discord_session_kickoff_goal_continuation_prestart_checker",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:input-schema:session-kickoff-goal-continuation:PRESTART_TOOL_SCHEMA",
+        "target": "hermes-static",
+        "capability": "input-schema:session-kickoff-goal-continuation:PRESTART_TOOL_SCHEMA",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:tool:discord_session_kickoff_seed_card_first_startup",
+        "target": "hermes-static",
+        "capability": "tool:discord_session_kickoff_seed_card_first_startup",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:handler:handle_discord_session_kickoff_seed_card_first_startup",
+        "target": "hermes-static",
+        "capability": "handler:handle_discord_session_kickoff_seed_card_first_startup",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:input-schema:session-kickoff-goal-continuation:SEED_CARD_TOOL_SCHEMA",
+        "target": "hermes-static",
+        "capability": "input-schema:session-kickoff-goal-continuation:SEED_CARD_TOOL_SCHEMA",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-goal-continuation:live_discord_allowed=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-goal-continuation:live_discord_allowed=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-goal-continuation:performs_network=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-goal-continuation:performs_network=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-goal-continuation:mutates_gateway=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-goal-continuation:mutates_gateway=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-goal-continuation:mutates_profile_config=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-goal-continuation:mutates_profile_config=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-goal-continuation:installs_into_active_profile=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-goal-continuation:installs_into_active_profile=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-goal-continuation:issue_pr_mutation_allowed=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-goal-continuation:issue_pr_mutation_allowed=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-goal-continuation:runner_contact_allowed=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-goal-continuation:runner_contact_allowed=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:tool:discord_session_kickoff_packet_renderer",
+        "target": "hermes-static",
+        "capability": "tool:discord_session_kickoff_packet_renderer",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:handler:handle_discord_session_kickoff_packet_renderer",
+        "target": "hermes-static",
+        "capability": "handler:handle_discord_session_kickoff_packet_renderer",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:input-schema:session-kickoff-packet-renderer:TOOL_SCHEMA",
+        "target": "hermes-static",
+        "capability": "input-schema:session-kickoff-packet-renderer:TOOL_SCHEMA",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-packet-renderer:live_discord_allowed=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-packet-renderer:live_discord_allowed=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-packet-renderer:performs_network=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-packet-renderer:performs_network=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-packet-renderer:mutates_gateway=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-packet-renderer:mutates_gateway=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-packet-renderer:mutates_profile_config=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-packet-renderer:mutates_profile_config=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-packet-renderer:installs_into_active_profile=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-packet-renderer:installs_into_active_profile=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:tool:discord_session_kickoff_receipt",
+        "target": "hermes-static",
+        "capability": "tool:discord_session_kickoff_receipt",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-receipt/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:handler:handle_discord_session_kickoff_receipt",
+        "target": "hermes-static",
+        "capability": "handler:handle_discord_session_kickoff_receipt",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-receipt/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:input-schema:session-kickoff-receipt:TOOL_SCHEMA",
+        "target": "hermes-static",
+        "capability": "input-schema:session-kickoff-receipt:TOOL_SCHEMA",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-receipt/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-receipt:live_discord_allowed=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-receipt:live_discord_allowed=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-receipt/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-receipt:performs_network=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-receipt:performs_network=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-receipt/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-receipt:mutates_gateway=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-receipt:mutates_gateway=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-receipt/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-receipt:mutates_profile_config=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-receipt:mutates_profile_config=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-receipt/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-receipt:installs_into_active_profile=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-receipt:installs_into_active_profile=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-receipt/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:tool:discord_session_kickoff_route_local_approval_guard",
+        "target": "hermes-static",
+        "capability": "tool:discord_session_kickoff_route_local_approval_guard",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-route-binding/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:handler:handle_discord_session_kickoff_route_local_approval_guard",
+        "target": "hermes-static",
+        "capability": "handler:handle_discord_session_kickoff_route_local_approval_guard",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-route-binding/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:input-schema:session-kickoff-route-binding:TOOL_SCHEMA",
+        "target": "hermes-static",
+        "capability": "input-schema:session-kickoff-route-binding:TOOL_SCHEMA",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-route-binding/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-route-binding:live_discord_allowed=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-route-binding:live_discord_allowed=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-route-binding/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-route-binding:performs_network=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-route-binding:performs_network=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-route-binding/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-route-binding:mutates_gateway=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-route-binding:mutates_gateway=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-route-binding/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-route-binding:mutates_profile_config=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-route-binding:mutates_profile_config=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-route-binding/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      },
+      {
+        "fact_id": "fact:declared:boundary:session-kickoff-route-binding:installs_into_active_profile=false",
+        "target": "hermes-static",
+        "capability": "boundary:session-kickoff-route-binding:installs_into_active_profile=false",
+        "value": true,
+        "source_id": "source:plugins/session-kickoff-route-binding/plugin.yaml",
+        "observed_at": "2026-07-13T00:00:00Z"
+      }
+    ],
+    "claims": [
+      {
+        "claim_id": "claim:static-plugin-catalog",
+        "target": "hermes-static",
+        "capability": "static-plugin-catalog",
+        "value": true,
+        "derivation_id": "derivation:static-plugin-catalog/v1",
+        "input_fact_ids": [
+          "fact:declared:boundary:session-courier:installs_into_active_profile=false",
+          "fact:declared:boundary:session-courier:live_discord_allowed=false",
+          "fact:declared:boundary:session-courier:mutates_gateway=false",
+          "fact:declared:boundary:session-courier:mutates_profile_config=false",
+          "fact:declared:boundary:session-courier:performs_network=false",
+          "fact:declared:boundary:session-kickoff-goal-continuation:installs_into_active_profile=false",
+          "fact:declared:boundary:session-kickoff-goal-continuation:issue_pr_mutation_allowed=false",
+          "fact:declared:boundary:session-kickoff-goal-continuation:live_discord_allowed=false",
+          "fact:declared:boundary:session-kickoff-goal-continuation:mutates_gateway=false",
+          "fact:declared:boundary:session-kickoff-goal-continuation:mutates_profile_config=false",
+          "fact:declared:boundary:session-kickoff-goal-continuation:performs_network=false",
+          "fact:declared:boundary:session-kickoff-goal-continuation:runner_contact_allowed=false",
+          "fact:declared:boundary:session-kickoff-packet-renderer:installs_into_active_profile=false",
+          "fact:declared:boundary:session-kickoff-packet-renderer:live_discord_allowed=false",
+          "fact:declared:boundary:session-kickoff-packet-renderer:mutates_gateway=false",
+          "fact:declared:boundary:session-kickoff-packet-renderer:mutates_profile_config=false",
+          "fact:declared:boundary:session-kickoff-packet-renderer:performs_network=false",
+          "fact:declared:boundary:session-kickoff-receipt:installs_into_active_profile=false",
+          "fact:declared:boundary:session-kickoff-receipt:live_discord_allowed=false",
+          "fact:declared:boundary:session-kickoff-receipt:mutates_gateway=false",
+          "fact:declared:boundary:session-kickoff-receipt:mutates_profile_config=false",
+          "fact:declared:boundary:session-kickoff-receipt:performs_network=false",
+          "fact:declared:boundary:session-kickoff-route-binding:installs_into_active_profile=false",
+          "fact:declared:boundary:session-kickoff-route-binding:live_discord_allowed=false",
+          "fact:declared:boundary:session-kickoff-route-binding:mutates_gateway=false",
+          "fact:declared:boundary:session-kickoff-route-binding:mutates_profile_config=false",
+          "fact:declared:boundary:session-kickoff-route-binding:performs_network=false"
+        ]
+      },
+      {
+        "claim_id": "claim:static-tool-catalog",
+        "target": "hermes-static",
+        "capability": "static-tool-catalog",
+        "value": true,
+        "derivation_id": "derivation:static-tool-catalog/v1",
+        "input_fact_ids": [
+          "fact:declared:handler:handle_discord_session_courier",
+          "fact:declared:handler:handle_discord_session_kickoff_goal_continuation",
+          "fact:declared:handler:handle_discord_session_kickoff_goal_continuation_compact_renderer",
+          "fact:declared:handler:handle_discord_session_kickoff_goal_continuation_prestart_checker",
+          "fact:declared:handler:handle_discord_session_kickoff_packet_renderer",
+          "fact:declared:handler:handle_discord_session_kickoff_receipt",
+          "fact:declared:handler:handle_discord_session_kickoff_route_local_approval_guard",
+          "fact:declared:handler:handle_discord_session_kickoff_seed_card_first_startup",
+          "fact:declared:input-schema:session-courier:TOOL_SCHEMA",
+          "fact:declared:input-schema:session-kickoff-goal-continuation:PRESTART_TOOL_SCHEMA",
+          "fact:declared:input-schema:session-kickoff-goal-continuation:RENDERER_TOOL_SCHEMA",
+          "fact:declared:input-schema:session-kickoff-goal-continuation:SEED_CARD_TOOL_SCHEMA",
+          "fact:declared:input-schema:session-kickoff-goal-continuation:TOOL_SCHEMA",
+          "fact:declared:input-schema:session-kickoff-packet-renderer:TOOL_SCHEMA",
+          "fact:declared:input-schema:session-kickoff-receipt:TOOL_SCHEMA",
+          "fact:declared:input-schema:session-kickoff-route-binding:TOOL_SCHEMA",
+          "fact:declared:tool:discord_session_courier",
+          "fact:declared:tool:discord_session_kickoff_goal_continuation_compact_renderer",
+          "fact:declared:tool:discord_session_kickoff_goal_continuation_prestart_checker",
+          "fact:declared:tool:discord_session_kickoff_goal_continuation_validator",
+          "fact:declared:tool:discord_session_kickoff_packet_renderer",
+          "fact:declared:tool:discord_session_kickoff_receipt",
+          "fact:declared:tool:discord_session_kickoff_route_local_approval_guard",
+          "fact:declared:tool:discord_session_kickoff_seed_card_first_startup"
+        ]
+      },
+      {
+        "claim_id": "claim:static-hermes-source-set",
+        "target": "hermes-static",
+        "capability": "static-hermes-source-set",
+        "value": true,
+        "derivation_id": "derivation:static-hermes-source-set/v1",
+        "input_fact_ids": [
+          "fact:source:plugins/session-courier/plugin.yaml",
+          "fact:source:plugins/session-courier/tool.py",
+          "fact:source:plugins/session-kickoff-goal-continuation/plugin.yaml",
+          "fact:source:plugins/session-kickoff-goal-continuation/tool.py",
+          "fact:source:plugins/session-kickoff-packet-renderer/plugin.yaml",
+          "fact:source:plugins/session-kickoff-packet-renderer/tool.py",
+          "fact:source:plugins/session-kickoff-receipt/plugin.yaml",
+          "fact:source:plugins/session-kickoff-receipt/tool.py",
+          "fact:source:plugins/session-kickoff-route-binding/plugin.yaml",
+          "fact:source:plugins/session-kickoff-route-binding/tool.py"
+        ]
+      }
+    ],
+    "unknowns": [
+      {
+        "unknown_id": "unknown:authorization",
+        "target": "hermes-static",
+        "capability": "authorization",
+        "reason": "NOT_OBSERVED_BY_STATIC_CATALOG"
+      },
+      {
+        "unknown_id": "unknown:command-execution",
+        "target": "hermes-static",
+        "capability": "command-execution",
+        "reason": "NOT_OBSERVED_BY_STATIC_CATALOG"
+      },
+      {
+        "unknown_id": "unknown:credentials",
+        "target": "hermes-static",
+        "capability": "credentials",
+        "reason": "NOT_OBSERVED_BY_STATIC_CATALOG"
+      },
+      {
+        "unknown_id": "unknown:dynamic-discovery",
+        "target": "hermes-static",
+        "capability": "dynamic-discovery",
+        "reason": "OUTSIDE_STATIC_SOURCE_COVERAGE"
+      },
+      {
+        "unknown_id": "unknown:live-state",
+        "target": "hermes-static",
+        "capability": "live-state",
+        "reason": "NOT_OBSERVED_BY_STATIC_CATALOG"
+      },
+      {
+        "unknown_id": "unknown:network",
+        "target": "hermes-static",
+        "capability": "network",
+        "reason": "NOT_OBSERVED_BY_STATIC_CATALOG"
+      },
+      {
+        "unknown_id": "unknown:plugin-registration",
+        "target": "hermes-static",
+        "capability": "plugin-registration",
+        "reason": "OUTSIDE_STATIC_SOURCE_COVERAGE"
+      },
+      {
+        "unknown_id": "unknown:runtime-availability",
+        "target": "hermes-static",
+        "capability": "runtime-availability",
+        "reason": "NOT_OBSERVED_BY_STATIC_CATALOG"
+      },
+      {
+        "unknown_id": "unknown:safe-path",
+        "target": "hermes-static",
+        "capability": "safe-path",
+        "reason": "OUTSIDE_STATIC_SOURCE_COVERAGE"
+      }
+    ]
+  },
+  "expected_source_paths": [
+    "plugins/session-courier/plugin.yaml",
+    "plugins/session-courier/tool.py",
+    "plugins/session-kickoff-goal-continuation/plugin.yaml",
+    "plugins/session-kickoff-goal-continuation/tool.py",
+    "plugins/session-kickoff-packet-renderer/plugin.yaml",
+    "plugins/session-kickoff-packet-renderer/tool.py",
+    "plugins/session-kickoff-receipt/plugin.yaml",
+    "plugins/session-kickoff-receipt/tool.py",
+    "plugins/session-kickoff-route-binding/plugin.yaml",
+    "plugins/session-kickoff-route-binding/tool.py"
+  ]
+}

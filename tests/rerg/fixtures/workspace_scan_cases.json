@@ -1,0 +1,5 @@
+{
+  "schema_version": "rerg-workspace-scan-cases/v1",
+  "entries": ["?? .gjc/state.json", "!! .omx/cache", " M rerg/raw_intake.py"],
+  "additional_allowed_prefixes": [".hermes-local"]
+}

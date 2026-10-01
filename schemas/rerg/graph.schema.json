@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:hermes:rerg:v1:graph",
+  "title": "RERG v1 canonical typed property graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "can_execute",
+    "mutation",
+    "transport",
+    "rollback_caveat",
+    "graph_id",
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "schema_version": {"const": "rerg/v1"},
+    "artifact_type": {"const": "graph"},
+    "can_execute": {"type": "boolean", "const": false},
+    "mutation": {"$ref": "#/$defs/inertMutation"},
+    "transport": {"$ref": "#/$defs/inertTransport"},
+    "rollback_caveat": {"const": "rollback_does_not_cover_leaked_data_or_poisoned_memory"},
+    "graph_id": {"type": "string", "minLength": 1},
+    "nodes": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/node"}
+    },
+    "edges": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/edge"}
+    }
+  },
+  "$defs": {
+    "inertMutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    },
+    "inertTransport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "risk_class",
+        "mutation_surface",
+        "requires_approval",
+        "proof_required",
+        "can_execute",
+        "authority_boundary",
+        "irreversibility_risk"
+      ],
+      "properties": {
+        "risk_class": {"enum": ["low", "medium", "high", "critical"]},
+        "mutation_surface": {"const": "inert"},
+        "requires_approval": {"type": "boolean"},
+        "proof_required": {"type": "boolean"},
+        "can_execute": {"type": "boolean", "const": false},
+        "authority_boundary": {"type": "string", "minLength": 1},
+        "irreversibility_risk": {"enum": ["none", "low", "medium", "high"]}
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "authority"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {
+          "enum": [
+            "artifact",
+            "surface",
+            "action",
+            "gate",
+            "lens_lane",
+            "route_outcome",
+            "execution_class",
+            "approval_packet",
+            "external_system",
+            "forbidden_action",
+            "decision",
+            "recommendation",
+            "risk",
+            "authority_boundary",
+            "mutation_surface",
+            "receipt",
+            "validator",
+            "transport"
+          ]
+        },
+        "authority": {"$ref": "#/$defs/authority"}
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "target", "kind"],
+      "properties": {
+        "source": {"type": "string", "minLength": 1},
+        "target": {"type": "string", "minLength": 1},
+        "kind": {
+          "enum": [
+            "consumes",
+            "produces",
+            "normalizes_to",
+            "renders_to",
+            "posts_to",
+            "fetches_receipt",
+            "verifies",
+            "requires_approval",
+            "blocked_by",
+            "forbids",
+            "depends_on",
+            "evidence_for",
+            "downgrades_to",
+            "proposes_patch"
+          ]
+        }
+      }
+    }
+  }
+}

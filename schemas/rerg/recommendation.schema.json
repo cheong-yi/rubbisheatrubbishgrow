@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:hermes:rerg:v1:recommendation",
+  "title": "RERG v1 recommendation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "can_execute",
+    "mutation",
+    "transport",
+    "rollback_caveat",
+    "recommendation_id",
+    "candidate_id",
+    "route_outcome",
+    "rationale",
+    "authority"
+  ],
+  "properties": {
+    "schema_version": {"const": "rerg/v1"},
+    "artifact_type": {"const": "recommendation"},
+    "can_execute": {"type": "boolean", "const": false},
+    "mutation": {"$ref": "#/$defs/inertMutation"},
+    "transport": {"$ref": "#/$defs/inertTransport"},
+    "rollback_caveat": {"const": "rollback_does_not_cover_leaked_data_or_poisoned_memory"},
+    "recommendation_id": {"type": "string", "minLength": 1},
+    "candidate_id": {"type": "string", "minLength": 1},
+    "route_outcome": {"enum": ["adopt_now", "pilot_first", "defer", "reject", "needs_more_facts"]},
+    "rationale": {"type": "string", "minLength": 1},
+    "authority": {"$ref": "urn:hermes:rerg:v1:authority-risk#/$defs/authority"}
+  },
+  "$defs": {
+    "inertMutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    },
+    "inertTransport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    }
+  }
+}

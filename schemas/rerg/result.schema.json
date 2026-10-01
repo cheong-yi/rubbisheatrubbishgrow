@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:hermes:rerg:v1:result",
+  "title": "RERG v1 result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "can_execute",
+    "mutation",
+    "transport",
+    "rollback_caveat",
+    "result_id",
+    "decision_mode",
+    "route_outcome",
+    "gate_status",
+    "candidate_ids"
+  ],
+  "properties": {
+    "schema_version": {"const": "rerg/v1"},
+    "artifact_type": {"const": "result"},
+    "can_execute": {"type": "boolean", "const": false},
+    "mutation": {"$ref": "#/$defs/inertMutation"},
+    "transport": {"$ref": "#/$defs/inertTransport"},
+    "rollback_caveat": {"const": "rollback_does_not_cover_leaked_data_or_poisoned_memory"},
+    "result_id": {"type": "string", "minLength": 1},
+    "decision_mode": {"enum": ["skim", "packet", "adoption", "oracle"]},
+    "route_outcome": {"enum": ["adopt_now", "pilot_first", "defer", "reject", "needs_more_facts"]},
+    "gate_status": {"enum": ["pass", "fail", "blocked", "not_run", "partial", "stale", "needs_more_facts"]},
+    "candidate_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "inertMutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    },
+    "inertTransport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    }
+  }
+}

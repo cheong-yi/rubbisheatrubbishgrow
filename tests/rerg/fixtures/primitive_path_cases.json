@@ -1,0 +1,158 @@
+{
+  "base_task": {
+    "target": "hermes-static",
+    "required_capabilities": ["static-hermes-source-set"],
+    "candidates": [
+      {
+        "path": "examples/rerg/portable-primitive-map-proof.json",
+        "rank": 10,
+        "dependencies": ["rerg/hermes_adapter.py", "rerg/primitive_map.py"],
+        "blocking_gates": [],
+        "dogfood_recipe": {"mode": "inert", "action": "inspect-json-only"}
+      }
+    ]
+  },
+  "path_confinement_cases": [
+    {"name": "parent-traversal", "field": "path", "value": "../outside.json"},
+    {"name": "nested-parent-traversal", "field": "path", "value": "a/../../outside.json"},
+    {"name": "dot-segment-noncanonical", "field": "path", "value": "examples/./proof.json"},
+    {"name": "windows-separator-traversal", "field": "path", "value": "a\\..\\outside.json"},
+    {"name": "windows-drive-relative", "field": "path", "value": "C:outside.json"},
+    {"name": "dependency-parent-traversal", "field": "dependencies", "value": ["rerg/../outside.py"]}
+  ],
+  "cases": [
+    {
+      "name": "concrete-hermes-safe-task",
+      "map": "hermes",
+      "semantic_reasons": [],
+      "task": {"required_capabilities": ["static-hermes-source-set"]},
+      "expected": {
+        "outcome": "accept",
+        "reasons": [],
+        "capability_matches": ["static-hermes-source-set"],
+        "dependencies": ["rerg/hermes_adapter.py", "rerg/primitive_map.py"],
+        "blocking_gates": [],
+        "evidence_gaps": [],
+        "minimal_safe_path": "examples/rerg/portable-primitive-map-proof.json",
+        "dogfood_recipe": {"mode": "inert", "action": "inspect-json-only"}
+      }
+    },
+    {
+      "name": "equivalent-safe-path-tie-break",
+      "map": "hermes",
+      "semantic_reasons": [],
+      "task": {
+        "candidates": [
+          {"path": "examples/rerg/z-proof.json", "rank": 10, "dependencies": [], "blocking_gates": [], "dogfood_recipe": {"mode": "inert", "action": "inspect-json-only"}},
+          {"path": "examples/rerg/a-proof.json", "rank": 10, "dependencies": [], "blocking_gates": [], "dogfood_recipe": {"mode": "inert", "action": "inspect-json-only"}}
+        ]
+      },
+      "expected": {
+        "outcome": "accept",
+        "reasons": [],
+        "capability_matches": ["static-hermes-source-set"],
+        "dependencies": [],
+        "blocking_gates": [],
+        "evidence_gaps": [],
+        "minimal_safe_path": "examples/rerg/a-proof.json",
+        "dogfood_recipe": {"mode": "inert", "action": "inspect-json-only"}
+      }
+    },
+    {
+      "name": "stale-observation",
+      "map": "synthetic-stale",
+      "semantic_reasons": ["STALE"],
+      "task": {"target": "synthetic-target", "required_capabilities": ["read-only-inspection"]},
+      "expected": {
+        "outcome": "needs_more_facts",
+        "reasons": ["STALE"],
+        "capability_matches": [],
+        "dependencies": [],
+        "blocking_gates": [],
+        "evidence_gaps": ["STALE"],
+        "minimal_safe_path": null,
+        "dogfood_recipe": null
+      }
+    },
+    {
+      "name": "required-unknown-capability",
+      "map": "synthetic-unknown",
+      "semantic_reasons": ["UNKNOWN"],
+      "task": {"target": "synthetic-target", "required_capabilities": ["runtime-availability"]},
+      "expected": {
+        "outcome": "needs_more_facts",
+        "reasons": ["UNKNOWN"],
+        "capability_matches": [],
+        "dependencies": [],
+        "blocking_gates": [],
+        "evidence_gaps": ["runtime-availability"],
+        "minimal_safe_path": null,
+        "dogfood_recipe": null
+      }
+    },
+    {
+      "name": "unsupported-capability",
+      "map": "synthetic",
+      "semantic_reasons": ["UNSUPPORTED"],
+      "task": {"target": "synthetic-target", "required_capabilities": ["not-in-bounded-vocabulary"]},
+      "expected": {
+        "outcome": "reject",
+        "reasons": ["UNSUPPORTED"],
+        "capability_matches": [],
+        "dependencies": [],
+        "blocking_gates": [],
+        "evidence_gaps": [],
+        "minimal_safe_path": null,
+        "dogfood_recipe": null
+      }
+    },
+    {
+      "name": "ambiguous-evidence",
+      "map": "synthetic-ambiguous",
+      "semantic_reasons": ["AMBIGUOUS"],
+      "task": {"target": "synthetic-target", "required_capabilities": ["read-only-inspection"]},
+      "expected": {
+        "outcome": "needs_more_facts",
+        "reasons": ["AMBIGUOUS"],
+        "capability_matches": [],
+        "dependencies": [],
+        "blocking_gates": [],
+        "evidence_gaps": ["AMBIGUOUS"],
+        "minimal_safe_path": null,
+        "dogfood_recipe": null
+      }
+    },
+    {
+      "name": "no-safe-path-blocking-gate",
+      "map": "hermes",
+      "semantic_reasons": [],
+      "task": {"candidates": [{"path": "examples/rerg/blocked.json", "rank": 1, "dependencies": [], "blocking_gates": ["approval-required"], "dogfood_recipe": {"mode": "inert", "action": "inspect-json-only"}}]},
+      "expected": {
+        "outcome": "defer",
+        "reasons": ["BLOCKING_GATE"],
+        "capability_matches": ["static-hermes-source-set"],
+        "dependencies": [],
+        "blocking_gates": ["approval-required"],
+        "evidence_gaps": [],
+        "minimal_safe_path": null,
+        "dogfood_recipe": null
+      }
+    },
+    {
+      "name": "tiny-synthetic-non-hermes-target",
+      "map": "synthetic",
+      "semantic_reasons": [],
+      "task": {"target": "synthetic-target", "required_capabilities": ["read-only-inspection"], "candidates": [{"path": "fixtures/synthetic-proof.json", "rank": 1, "dependencies": [], "blocking_gates": [], "dogfood_recipe": {"mode": "inert", "action": "inspect-json-only"}}]},
+      "expected": {
+        "outcome": "accept",
+        "reasons": [],
+        "capability_matches": ["read-only-inspection"],
+        "dependencies": [],
+        "blocking_gates": [],
+        "evidence_gaps": [],
+        "minimal_safe_path": "fixtures/synthetic-proof.json",
+        "dogfood_recipe": {"mode": "inert", "action": "inspect-json-only"}
+      }
+    }
+  ]
+}

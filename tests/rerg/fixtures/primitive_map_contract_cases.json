@@ -1,0 +1,138 @@
+{
+  "valid_catalog": {
+    "schema_version": "primitive-map/v1",
+    "artifact_type": "primitive-map",
+    "catalog_id": "portable-targets-1",
+    "freshness_policy": {
+      "evaluated_at": "2026-07-12T12:00:00Z",
+      "max_age_seconds": 86400
+    },
+    "coverage": {
+      "targets": ["portable-target"],
+      "limitations": ["Static catalog evidence only; no runtime authorization."]
+    },
+    "unknowns": [],
+    "facts": [
+      {
+        "id": "fact-observed-shell",
+        "kind": "observed",
+        "target": "portable-target",
+        "capability": "shell",
+        "value": true,
+        "source": {
+          "artifact_id": "artifact:portable-target-manifest",
+          "artifact_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "observed_at": "2026-07-12T11:00:00Z"
+      },
+      {
+        "id": "fact-observed-process",
+        "kind": "observed",
+        "target": "portable-target",
+        "capability": "process",
+        "value": true,
+        "source": {
+          "artifact_id": "artifact:portable-target-manifest",
+          "artifact_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "observed_at": "2026-07-12T11:00:00Z"
+      },
+      {
+        "id": "claim-command-execution",
+        "kind": "derived",
+        "target": "portable-target",
+        "capability": "command-execution",
+        "value": true,
+        "derivation": {
+          "method": "all-inputs-true",
+          "version": "1",
+          "input_fact_ids": ["fact-observed-shell", "fact-observed-process"]
+        }
+      }
+    ]
+  },
+  "required_field_paths": [
+    ["freshness_policy"],
+    ["coverage"],
+    ["unknowns"],
+    ["facts", 0, "source"],
+    ["facts", 0, "observed_at"],
+    ["facts", 0, "source", "artifact_id"],
+    ["facts", 0, "source", "artifact_digest"]
+  ],
+  "fail_closed_cases": [
+    {
+      "name": "stale",
+      "target": "portable-target",
+      "capability": "shell",
+      "mutation": {"path": ["freshness_policy", "evaluated_at"], "value": "2026-07-14T12:00:00Z"},
+      "expected": ["STALE"]
+    },
+    {
+      "name": "future-direct-observation",
+      "target": "portable-target",
+      "capability": "shell",
+      "mutation": {"path": ["facts", 0, "observed_at"], "value": "2026-07-12T12:00:01Z"},
+      "expected": ["FUTURE_OBSERVATION"]
+    },
+    {
+      "name": "future-derived-observation-input",
+      "target": "portable-target",
+      "capability": "command-execution",
+      "mutation": {"path": ["facts", 0, "observed_at"], "value": "2026-07-12T12:00:01Z"},
+      "expected": ["FUTURE_OBSERVATION"]
+    },
+    {
+      "name": "exact-max-age-boundary",
+      "target": "portable-target",
+      "capability": "shell",
+      "mutation": {"path": ["freshness_policy", "evaluated_at"], "value": "2026-07-13T11:00:00Z"},
+      "expected": []
+    },
+    {
+      "name": "one-second-beyond-max-age",
+      "target": "portable-target",
+      "capability": "shell",
+      "mutation": {"path": ["freshness_policy", "evaluated_at"], "value": "2026-07-13T11:00:01Z"},
+      "expected": ["STALE"]
+    },
+    {
+      "name": "unknown",
+      "target": "portable-target",
+      "capability": "browser",
+      "mutation": {"path": ["unknowns"], "value": [{"id": "unknown-browser", "target": "portable-target", "capability": "browser", "reason": "not observed"}]},
+      "expected": ["UNKNOWN"]
+    },
+    {
+      "name": "unsupported",
+      "target": "portable-target",
+      "capability": "shell",
+      "mutation": {"path": ["facts", 0, "value"], "value": false},
+      "expected": ["UNSUPPORTED"]
+    },
+    {
+      "name": "ambiguous",
+      "target": "portable-target",
+      "capability": "shell",
+      "append_fact": {
+        "id": "fact-observed-shell-conflict",
+        "kind": "observed",
+        "target": "portable-target",
+        "capability": "shell",
+        "value": false,
+        "source": {
+          "artifact_id": "artifact:second-manifest",
+          "artifact_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "observed_at": "2026-07-12T11:30:00Z"
+      },
+      "expected": ["AMBIGUOUS"]
+    },
+    {
+      "name": "outside-coverage",
+      "target": "other-target",
+      "capability": "shell",
+      "expected": ["OUTSIDE_COVERAGE"]
+    }
+  ]
+}

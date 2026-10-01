@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:hermes:rerg:v1:operator-request",
+  "title": "RERG operator request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "artifact_type", "candidate", "catalog_id", "catalog_path",
+    "catalog_sha256", "evaluated_at", "max_age_seconds", "target",
+    "required_capabilities", "path_candidates"
+  ],
+  "properties": {
+    "schema_version": {"const": "rerg-operator-request/v1"},
+    "artifact_type": {"const": "operator-request"},
+    "candidate": {"$ref": "urn:hermes:rerg:v1:candidate"},
+    "catalog_id": {"const": "hermes-static-source:session-kickoff/v1"},
+    "catalog_path": {"const": "catalogs/rerg/hermes-static-source.json"},
+    "catalog_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "evaluated_at": {"$ref": "#/$defs/timestamp"},
+    "max_age_seconds": {"type": "integer", "minimum": 0},
+    "target": {"const": "hermes-static"},
+    "required_capabilities": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "path_candidates": {
+      "type": "array", "minItems": 1, "maxItems": 3,
+      "items": {"$ref": "#/$defs/pathCandidate"}
+    }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "pathCandidate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rank", "path", "capabilities", "recipe"],
+      "properties": {
+        "rank": {"type": "integer", "minimum": 1, "maximum": 3},
+        "path": {"type": "string", "minLength": 1},
+        "capabilities": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "recipe": {"$ref": "#/$defs/inertRecipe"}
+      }
+    },
+    "inertRecipe": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "mutation", "transport"],
+      "properties": {
+        "kind": {"type": "string", "minLength": 1},
+        "mutation": {"const": "inert"},
+        "transport": {"const": "inert"}
+      }
+    }
+  }
+}

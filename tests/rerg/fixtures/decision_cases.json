@@ -1,0 +1,196 @@
+{
+  "suite": "rerg-v1-local-decision-engine",
+  "modes": ["skim", "packet", "adoption", "oracle"],
+  "route_outcomes": ["adopt_now", "pilot_first", "defer", "reject", "needs_more_facts"],
+  "candidate_types": [
+    "skill",
+    "hook",
+    "plugin",
+    "prompt_workflow",
+    "adapter",
+    "eval_harness",
+    "external_tool_service"
+  ],
+  "query_names": [
+    "every_path_to_live_mutation",
+    "evidence_supporting_adopt_or_dogfood_route",
+    "gates_blocking_route_outcome"
+  ],
+  "packet": {
+    "schema_version": "rerg-decision/v1",
+    "mode": "packet",
+    "candidates": [
+      {
+        "schema_version": "rerg/v1",
+        "artifact_type": "candidate",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "candidate_id": "candidate-skill",
+        "candidate_type": "skill",
+        "title": "Verified local skill",
+        "summary": "A concrete high-value local workflow gap is verified."
+      },
+      {
+        "schema_version": "rerg/v1",
+        "artifact_type": "candidate",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "candidate_id": "candidate-hook",
+        "candidate_type": "hook",
+        "title": "Approval-gated hook",
+        "summary": "A useful hook remains approval-gated and inert."
+      },
+      {
+        "schema_version": "rerg/v1",
+        "artifact_type": "candidate",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "candidate_id": "candidate-plugin",
+        "candidate_type": "plugin",
+        "title": "Unknown plugin",
+        "summary": "Material facts about this plugin remain unknown."
+      },
+      {
+        "schema_version": "rerg/v1",
+        "artifact_type": "candidate",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "candidate_id": "candidate-prompt",
+        "candidate_type": "prompt_workflow",
+        "title": "Reference prompt",
+        "summary": "No concrete workflow gap currently requires adoption."
+      },
+      {
+        "schema_version": "rerg/v1",
+        "artifact_type": "candidate",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "candidate_id": "candidate-adapter",
+        "candidate_type": "adapter",
+        "title": "Rejected adapter",
+        "summary": "A verified disqualifying constraint rules out this adapter."
+      },
+      {
+        "schema_version": "rerg/v1",
+        "artifact_type": "candidate",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "candidate_id": "candidate-eval",
+        "candidate_type": "eval_harness",
+        "title": "Reversible evaluation harness",
+        "summary": "A bounded read-only pilot can test the workflow gap."
+      },
+      {
+        "schema_version": "rerg/v1",
+        "artifact_type": "candidate",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "candidate_id": "candidate-service",
+        "candidate_type": "external_tool_service",
+        "title": "High-surface external service",
+        "summary": "Low current value but high surface warrants separate retention."
+      }
+    ],
+    "graphs": [
+      {
+        "schema_version": "rerg/v1",
+        "artifact_type": "graph",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "graph_id": "graph-decision",
+        "nodes": [
+          {"id": "source", "kind": "artifact", "authority": {"risk_class": "low", "mutation_surface": "inert", "requires_approval": false, "proof_required": true, "can_execute": false, "authority_boundary": "local-query-only", "irreversibility_risk": "none"}},
+          {"id": "mutation", "kind": "mutation_surface", "authority": {"risk_class": "high", "mutation_surface": "inert", "requires_approval": true, "proof_required": true, "can_execute": false, "authority_boundary": "local-query-only", "irreversibility_risk": "high"}},
+          {"id": "evidence-skill", "kind": "artifact", "authority": {"risk_class": "low", "mutation_surface": "inert", "requires_approval": false, "proof_required": true, "can_execute": false, "authority_boundary": "local-query-only", "irreversibility_risk": "none"}},
+          {"id": "route-adopt", "kind": "route_outcome", "authority": {"risk_class": "low", "mutation_surface": "inert", "requires_approval": false, "proof_required": true, "can_execute": false, "authority_boundary": "local-query-only", "irreversibility_risk": "none"}},
+          {"id": "lane-dogfood", "kind": "lens_lane", "authority": {"risk_class": "low", "mutation_surface": "inert", "requires_approval": false, "proof_required": true, "can_execute": false, "authority_boundary": "local-query-only", "irreversibility_risk": "none"}},
+          {"id": "route-pilot", "kind": "route_outcome", "authority": {"risk_class": "high", "mutation_surface": "inert", "requires_approval": true, "proof_required": true, "can_execute": false, "authority_boundary": "local-query-only", "irreversibility_risk": "medium"}},
+          {"id": "gate-approval", "kind": "gate", "authority": {"risk_class": "high", "mutation_surface": "inert", "requires_approval": true, "proof_required": true, "can_execute": false, "authority_boundary": "local-query-only", "irreversibility_risk": "none"}}
+        ],
+        "edges": [
+          {"source": "source", "target": "mutation", "kind": "depends_on"},
+          {"source": "evidence-skill", "target": "route-adopt", "kind": "evidence_for"},
+          {"source": "evidence-skill", "target": "lane-dogfood", "kind": "evidence_for"},
+          {"source": "route-pilot", "target": "gate-approval", "kind": "blocked_by"}
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "schema_version": "rerg/v1",
+        "artifact_type": "evidence",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "evidence_id": "evidence-skill",
+        "candidate_id": "candidate-skill",
+        "facts": [{"claim": "The local workflow gap is reproducible.", "source": "local fixture", "proof_status": "verified"}]
+      }
+    ],
+    "results": [
+      {
+        "schema_version": "rerg/v1",
+        "artifact_type": "result",
+        "can_execute": false,
+        "mutation": {"mode": "inert"},
+        "transport": {"mode": "inert"},
+        "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+        "result_id": "prior-result",
+        "decision_mode": "packet",
+        "route_outcome": "needs_more_facts",
+        "gate_status": "needs_more_facts",
+        "candidate_ids": ["candidate-plugin"]
+      }
+    ],
+    "assessments": [
+      {"candidate_id": "candidate-skill", "facts_complete": true, "value": "high", "concrete_workflow_gap": true, "dogfood_task": true, "high_risk_or_surface": false, "approval_required": false, "disqualifying": false},
+      {"candidate_id": "candidate-hook", "facts_complete": true, "value": "medium", "concrete_workflow_gap": true, "dogfood_task": false, "high_risk_or_surface": true, "approval_required": true, "disqualifying": false},
+      {"candidate_id": "candidate-plugin", "facts_complete": false, "value": "unknown", "concrete_workflow_gap": false, "dogfood_task": false, "high_risk_or_surface": false, "approval_required": false, "disqualifying": false},
+      {"candidate_id": "candidate-prompt", "facts_complete": true, "value": "medium", "concrete_workflow_gap": false, "dogfood_task": false, "high_risk_or_surface": false, "approval_required": false, "disqualifying": false},
+      {"candidate_id": "candidate-adapter", "facts_complete": true, "value": "high", "concrete_workflow_gap": true, "dogfood_task": false, "high_risk_or_surface": false, "approval_required": false, "disqualifying": true},
+      {"candidate_id": "candidate-eval", "facts_complete": true, "value": "medium", "concrete_workflow_gap": true, "dogfood_task": false, "high_risk_or_surface": false, "approval_required": false, "disqualifying": false},
+      {"candidate_id": "candidate-service", "facts_complete": true, "value": "low", "concrete_workflow_gap": false, "dogfood_task": false, "high_risk_or_surface": true, "approval_required": true, "disqualifying": false}
+    ],
+    "query": {"name": "every_path_to_live_mutation", "graph_id": "graph-decision"}
+  },
+  "expected_routes": {
+    "candidate-skill": "adopt_now",
+    "candidate-hook": "pilot_first",
+    "candidate-plugin": "needs_more_facts",
+    "candidate-prompt": "defer",
+    "candidate-adapter": "reject",
+    "candidate-eval": "pilot_first",
+    "candidate-service": "defer"
+  },
+  "expected_lanes": {
+    "candidate-skill": "dogfood",
+    "candidate-hook": "sandbox_spike",
+    "candidate-plugin": "reference",
+    "candidate-prompt": "reference",
+    "candidate-adapter": "backlog",
+    "candidate-eval": "sandbox_spike",
+    "candidate-service": "backlog"
+  },
+  "expected_queries": {
+    "every_path_to_live_mutation": [["source", "mutation"]],
+    "evidence_supporting_adopt_or_dogfood_route": [["evidence-skill", "lane-dogfood"], ["evidence-skill", "route-adopt"]],
+    "gates_blocking_route_outcome": [["route-pilot", "gate-approval"]]
+  }
+}
