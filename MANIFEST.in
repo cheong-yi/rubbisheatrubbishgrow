@@ -1,0 +1,6 @@
+include source-manifest.json
+include requirements-rerg-parser.lock
+recursive-include schemas/rerg *.json
+recursive-include tests/rerg *.py *.json *.yaml
+recursive-include docs *.md
+recursive-include skills/rerg *.md

@@ -1,0 +1,433 @@
+{
+  "suite": "rerg-v1-contracts",
+  "groups": [
+    {
+      "name": "valid-artifacts",
+      "cases": [
+        {
+          "name": "valid_graph",
+          "schema": "graph",
+          "payload": {
+            "schema_version": "rerg/v1",
+            "artifact_type": "graph",
+            "can_execute": false,
+            "mutation": {"mode": "inert"},
+            "transport": {"mode": "inert"},
+            "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+            "graph_id": "graph-001",
+            "nodes": [
+              {
+                "id": "candidate-001",
+                "kind": "artifact",
+                "authority": {
+                  "risk_class": "low",
+                  "mutation_surface": "inert",
+                  "requires_approval": false,
+                  "proof_required": true,
+                  "can_execute": false,
+                  "authority_boundary": "contract-only",
+                  "irreversibility_risk": "none"
+                }
+              },
+              {
+                "id": "recommendation-001",
+                "kind": "recommendation",
+                "authority": {
+                  "risk_class": "low",
+                  "mutation_surface": "inert",
+                  "requires_approval": false,
+                  "proof_required": true,
+                  "can_execute": false,
+                  "authority_boundary": "contract-only",
+                  "irreversibility_risk": "none"
+                }
+              }
+            ],
+            "edges": [
+              {
+                "source": "candidate-001",
+                "target": "recommendation-001",
+                "kind": "produces"
+              }
+            ]
+          }
+        },
+        {
+          "name": "valid_candidate",
+          "schema": "candidate",
+          "payload": {
+            "schema_version": "rerg/v1",
+            "artifact_type": "candidate",
+            "can_execute": false,
+            "mutation": {"mode": "inert"},
+            "transport": {"mode": "inert"},
+            "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+            "candidate_id": "candidate-001",
+            "candidate_type": "skill",
+            "title": "Local contract candidate",
+            "summary": "An inert candidate description."
+          }
+        },
+        {
+          "name": "valid_result",
+          "schema": "result",
+          "payload": {
+            "schema_version": "rerg/v1",
+            "artifact_type": "result",
+            "can_execute": false,
+            "mutation": {"mode": "inert"},
+            "transport": {"mode": "inert"},
+            "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+            "result_id": "result-001",
+            "decision_mode": "packet",
+            "route_outcome": "pilot_first",
+            "gate_status": "partial",
+            "candidate_ids": ["candidate-001"]
+          }
+        }
+      ]
+    },
+    {
+      "name": "nested-valid-artifacts",
+      "nested": {
+        "cases": [
+          {
+            "name": "valid_evidence",
+            "schema": "evidence",
+            "payload": {
+              "schema_version": "rerg/v1",
+              "artifact_type": "evidence",
+              "can_execute": false,
+              "mutation": {"mode": "inert"},
+              "transport": {"mode": "inert"},
+              "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+              "evidence_id": "evidence-001",
+              "candidate_id": "candidate-001",
+              "facts": [
+                {
+                  "claim": "The contract is locally validated.",
+                  "source": "fixture",
+                  "proof_status": "verified"
+                }
+              ]
+            }
+          },
+          {
+            "name": "valid_recommendation",
+            "schema": "recommendation",
+            "payload": {
+              "schema_version": "rerg/v1",
+              "artifact_type": "recommendation",
+              "can_execute": false,
+              "mutation": {"mode": "inert"},
+              "transport": {"mode": "inert"},
+              "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+              "recommendation_id": "recommendation-001",
+              "candidate_id": "candidate-001",
+              "route_outcome": "pilot_first",
+              "rationale": "Validate in a bounded inert pilot first.",
+              "authority": {
+                "risk_class": "low",
+                "mutation_surface": "inert",
+                "requires_approval": false,
+                "proof_required": true,
+                "can_execute": false,
+                "authority_boundary": "recommendation-only",
+                "irreversibility_risk": "none"
+              }
+            }
+          },
+          {
+            "name": "valid_authority_risk",
+            "schema": "authority-risk",
+            "payload": {
+              "schema_version": "rerg/v1",
+              "artifact_type": "authority-risk",
+              "can_execute": false,
+              "mutation": {"mode": "inert"},
+              "transport": {"mode": "inert"},
+              "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+              "packet_id": "authority-risk-001",
+              "authority": {
+                "risk_class": "low",
+                "mutation_surface": "inert",
+                "requires_approval": false,
+                "proof_required": true,
+                "can_execute": false,
+                "authority_boundary": "contract-only",
+                "irreversibility_risk": "none"
+              },
+              "risk_screen": {
+                "credentials": false,
+                "browser_session_state": false,
+                "network_api_surface": false,
+                "persistent_state": false,
+                "repo_config_mutation": false,
+                "user_data": false,
+                "cron_hooks_mcp_plugins_server": false,
+                "prompt_injection_surface": false,
+                "irreversible_effects": false
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "invalid-artifacts",
+      "cases": [
+        {
+          "name": "can_execute_true",
+          "schema": "candidate",
+          "expected_reason": "CAN_EXECUTE_MUST_BE_FALSE",
+          "payload": {
+            "schema_version": "rerg/v1",
+            "artifact_type": "candidate",
+            "can_execute": true,
+            "mutation": {"mode": "inert"},
+            "transport": {"mode": "inert"},
+            "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+            "candidate_id": "candidate-002",
+            "candidate_type": "hook",
+            "title": "Invalid executable candidate",
+            "summary": "This must fail only for execution authority."
+          }
+        },
+        {
+          "name": "non_inert_mutation_surface",
+          "schema": "authority-risk",
+          "expected_reason": "MUTATION_MUST_BE_INERT",
+          "payload": {
+            "schema_version": "rerg/v1",
+            "artifact_type": "authority-risk",
+            "can_execute": false,
+            "mutation": {"mode": "inert"},
+            "transport": {"mode": "inert"},
+            "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+            "packet_id": "authority-risk-003",
+            "authority": {
+              "risk_class": "low",
+              "mutation_surface": "write",
+              "requires_approval": false,
+              "proof_required": true,
+              "can_execute": false,
+              "authority_boundary": "contract-only",
+              "irreversibility_risk": "none"
+            },
+            "risk_screen": {
+              "credentials": false,
+              "browser_session_state": false,
+              "network_api_surface": false,
+              "persistent_state": false,
+              "repo_config_mutation": false,
+              "user_data": false,
+              "cron_hooks_mcp_plugins_server": false,
+              "prompt_injection_surface": false,
+              "irreversible_effects": false
+            }
+          }
+        },
+        {
+          "name": "live_transport",
+          "schema": "evidence",
+          "expected_reason": "TRANSPORT_MUST_BE_INERT",
+          "payload": {
+            "schema_version": "rerg/v1",
+            "artifact_type": "evidence",
+            "can_execute": false,
+            "mutation": {"mode": "inert"},
+            "transport": {"mode": "live"},
+            "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+            "evidence_id": "evidence-002",
+            "candidate_id": "candidate-001",
+            "facts": [
+              {
+                "claim": "The live transport mode is intentionally invalid.",
+                "source": "fixture",
+                "proof_status": "unverified"
+              }
+            ]
+          }
+        },
+        {
+          "name": "missing_rollback_caveat",
+          "schema": "result",
+          "expected_reason": "ROLLBACK_CAVEAT_REQUIRED",
+          "payload": {
+            "schema_version": "rerg/v1",
+            "artifact_type": "result",
+            "can_execute": false,
+            "mutation": {"mode": "inert"},
+            "transport": {"mode": "inert"},
+            "result_id": "result-002",
+            "decision_mode": "skim",
+            "route_outcome": "needs_more_facts",
+            "gate_status": "needs_more_facts",
+            "candidate_ids": ["candidate-001"]
+          }
+        },
+        {
+          "name": "unknown_field",
+          "schema": "graph",
+          "expected_reason": "UNKNOWN_FIELD",
+          "payload": {
+            "schema_version": "rerg/v1",
+            "artifact_type": "graph",
+            "can_execute": false,
+            "mutation": {"mode": "inert"},
+            "transport": {"mode": "inert"},
+            "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+            "graph_id": "graph-002",
+            "nodes": [],
+            "edges": [],
+            "unexpected": "closed-world violation"
+          }
+        },
+        {
+          "name": "malformed_boolean",
+          "schema": "authority-risk",
+          "expected_reason": "MALFORMED_BOOLEAN",
+          "payload": {
+            "schema_version": "rerg/v1",
+            "artifact_type": "authority-risk",
+            "can_execute": false,
+            "mutation": {"mode": "inert"},
+            "transport": {"mode": "inert"},
+            "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+            "packet_id": "authority-risk-002",
+            "authority": {
+              "risk_class": "low",
+              "mutation_surface": "inert",
+              "requires_approval": "false",
+              "proof_required": true,
+              "can_execute": false,
+              "authority_boundary": "contract-only",
+              "irreversibility_risk": "none"
+            },
+            "risk_screen": {
+              "credentials": false,
+              "browser_session_state": false,
+              "network_api_surface": false,
+              "persistent_state": false,
+              "repo_config_mutation": false,
+              "user_data": false,
+              "cron_hooks_mcp_plugins_server": false,
+              "prompt_injection_surface": false,
+              "irreversible_effects": false
+            }
+          }
+        }
+      ]
+    }
+  ,
+    {
+      "name": "operator-contracts",
+      "cases": [
+        {
+          "name": "valid_operator_request",
+          "schema": "operator-request",
+          "payload": {
+            "schema_version": "rerg-operator-request/v1",
+            "artifact_type": "operator-request",
+            "candidate": {
+              "schema_version": "rerg/v1",
+              "artifact_type": "candidate",
+              "can_execute": false,
+              "mutation": {"mode": "inert"},
+              "transport": {"mode": "inert"},
+              "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+              "candidate_id": "candidate-contract",
+              "candidate_type": "plugin",
+              "title": "Contract candidate",
+              "summary": "An inert contract fixture."
+            },
+            "catalog_id": "hermes-static-source:session-kickoff/v1",
+            "catalog_path": "catalogs/rerg/hermes-static-source.json",
+            "catalog_sha256": "sha256:04d766dd6ef4e2b15c918ca508d5a018ed7a019e07550d64a1d4629551e2c34d",
+            "evaluated_at": "2026-07-13T00:00:00Z",
+            "max_age_seconds": 86400,
+            "target": "hermes-static",
+            "required_capabilities": ["static-plugin-catalog"],
+            "path_candidates": [{"rank": 1, "path": "examples/rerg/portable-primitive-map-proof.json", "capabilities": ["static-plugin-catalog"], "recipe": {"kind": "read-only-fixture", "mutation": "inert", "transport": "inert"}}]
+          }
+        },
+        {
+          "name": "valid_operator_result",
+          "schema": "operator-result",
+          "payload": {
+            "schema_version": "rerg-operator-result/v1",
+            "artifact_type": "operator-result",
+            "can_execute": false,
+            "mutation": {"mode": "inert"},
+            "transport": {"mode": "inert"},
+            "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+            "request_id": "candidate-contract",
+            "candidate_id": "candidate-contract",
+            "pin": {"catalog_id": "hermes-static-source:session-kickoff/v1", "catalog_path": "catalogs/rerg/hermes-static-source.json", "catalog_sha256": "sha256:04d766dd6ef4e2b15c918ca508d5a018ed7a019e07550d64a1d4629551e2c34d"},
+            "freshness": {"evaluated_at": "2026-07-13T00:00:00Z", "max_age_seconds": 86400, "status": "fresh"},
+            "coverage": {"target": "hermes-static", "required_capabilities": ["static-plugin-catalog"], "covered_capabilities": ["static-plugin-catalog"], "unknown_capabilities": []},
+            "unknowns": [],
+            "blockers": [],
+            "downgrade_reasons": [],
+            "actions": [],
+            "minimal_safe_path": null,
+            "provenance": {"catalog_id": "hermes-static-source:session-kickoff/v1", "catalog_path": "catalogs/rerg/hermes-static-source.json", "catalog_sha256": "sha256:04d766dd6ef4e2b15c918ca508d5a018ed7a019e07550d64a1d4629551e2c34d"}
+          }
+        }
+      ]
+    },
+    {
+      "name": "typed-observation-contract",
+      "cases": [
+        {
+          "name": "valid_typed_observation_evidence",
+          "schema": "evidence",
+          "payload": {
+            "schema_version": "rerg/v1",
+            "artifact_type": "evidence",
+            "can_execute": false,
+            "mutation": {"mode": "inert"},
+            "transport": {"mode": "inert"},
+            "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+            "evidence_id": "evidence-typed-observation-contract",
+            "candidate_id": "candidate-typed-observation-contract",
+            "facts": [
+              {
+                "observation_id": "contract-candidate-form",
+                "subject": "candidate",
+                "predicate": "candidate.form",
+                "value": "plugin",
+                "source": "fixture:typed-observation-contract",
+                "proof_status": "verified"
+              },
+              {
+                "observation_id": "contract-missing-surface",
+                "subject": "workflow",
+                "predicate": "workflow.missing_surface",
+                "value": true,
+                "source": "fixture:typed-observation-contract",
+                "proof_status": "verified"
+              },
+              {
+                "observation_id": "contract-target-scope",
+                "subject": "target",
+                "predicate": "target.scope",
+                "value": "hermes_static_source",
+                "source": "fixture:typed-observation-contract",
+                "proof_status": "verified"
+              },
+              {
+                "observation_id": "contract-network-risk",
+                "subject": "risk",
+                "predicate": "risk.network_api_contact",
+                "value": false,
+                "source": "fixture:typed-observation-contract",
+                "proof_status": "verified"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

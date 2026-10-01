@@ -1,0 +1,62 @@
+{
+  "schema": "rerg-capability-path-graph-cases/v1",
+  "graph_catalog_path": "catalogs/rerg/hermes-capability-path-graph.json",
+  "source_primitive_map_id": "primitive-map:hermes-static-source:session-kickoff/v1",
+  "source_primitive_map_sha256": "sha256:833962de8915fe32ba1723963dbcee6459d0555c6e56954ac9735c58e581c28c",
+  "verified_requirement": {
+    "required_capabilities": ["static-plugin-catalog"],
+    "expected": [
+      {
+        "rank": 1,
+        "path": "examples/rerg/portable-primitive-map-proof.json",
+        "capabilities": ["static-plugin-catalog"],
+        "dependencies": ["catalogs/rerg/hermes-static-source.json"],
+        "blocking_gates": [],
+        "recipe": {
+          "kind": "read-only-fixture",
+          "mutation": "inert",
+          "transport": "inert"
+        }
+      }
+    ]
+  },
+  "no_path_requirements": [
+    {"name": "unknown", "required_capabilities": ["unknown-capability"], "expected": []},
+    {"name": "ambiguous", "required_capabilities": ["static-plugin-catalog", "static-tool-catalog"], "expected": []},
+    {"name": "empty", "required_capabilities": [], "expected": []}
+  ],
+  "unsafe_paths": [
+    {"name": "absolute", "value": "/tmp/proof.json"},
+    {"name": "traversal", "value": "../proof.json"},
+    {"name": "windows-drive", "value": "C:/proof.json"},
+    {"name": "windows-separator", "value": "examples\\proof.json"},
+    {"name": "noncanonical-dot", "value": "examples/./proof.json"},
+    {"name": "duplicate-separator", "value": "examples//proof.json"},
+    {"name": "nonexistent", "value": "examples/rerg/not-present.json"},
+    {"name": "symlink-escape", "value": "fixtures/escape-link.json"}
+  ],
+  "contract_mutations": [
+    "duplicate_node_id",
+    "duplicate_edge_id",
+    "dangling_edge",
+    "unsafe_path",
+    "too_many_paths",
+    "non_inert_recipe",
+    "wrong_catalog_id",
+    "wrong_catalog_path",
+    "wrong_catalog_sha256",
+    "missing_primitive_map_id",
+    "wrong_primitive_map_sha256",
+    "missing_primitive_fact",
+    "reused_fact_id_changed_content",
+    "changed_normalized_fact_content",
+    "stale_non_emitted_primitive_map"
+  ],
+  "stable_failure_reasons": {
+    "catalog": "CATALOG_BINDING_MISMATCH",
+    "primitive_map": "PRIMITIVE_MAP_BINDING_MISMATCH",
+    "fact_content": "PRIMITIVE_FACT_CONTENT_MISMATCH",
+    "graph": "INVALID_CAPABILITY_PATH_GRAPH",
+    "path": "UNSAFE_PATH"
+  }
+}

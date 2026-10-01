@@ -1,0 +1,318 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:hermes:rerg:v1:intake-derivation-rules",
+  "title": "RERG intake derivation rules and result contracts v1",
+  "oneOf": [
+    {"$ref": "#/$defs/rulesCatalog"},
+    {"$ref": "#/$defs/derivationResult"}
+  ],
+  "$defs": {
+    "inertMutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    },
+    "inertTransport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    },
+    "candidateType": {
+      "enum": [
+        "skill", "hook", "plugin", "prompt_workflow", "adapter",
+        "eval_harness", "external_tool_service"
+      ]
+    },
+    "riskSurface": {
+      "enum": [
+        "credentials", "browser_session_state", "network_api_surface",
+        "persistent_state", "repo_config_mutation", "user_data",
+        "cron_hooks_mcp_plugins_server", "prompt_injection_surface",
+        "irreversible_effects"
+      ]
+    },
+    "assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "facts_complete", "value", "concrete_workflow_gap", "dogfood_task",
+        "high_risk_or_surface", "approval_required", "disqualifying"
+      ],
+      "properties": {
+        "facts_complete": {"type": "boolean"},
+        "value": {"enum": ["high", "medium", "low", "none", "unknown"]},
+        "concrete_workflow_gap": {"type": "boolean"},
+        "dogfood_task": {"type": "boolean"},
+        "high_risk_or_surface": {"type": "boolean"},
+        "approval_required": {"type": "boolean"},
+        "disqualifying": {"type": "boolean"}
+      }
+    },
+    "oracle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "ran", "reason"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "ran": {"const": false},
+        "reason": {"enum": ["not_required", "high_risk_or_control_plane"]}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"required": {"const": true}}},
+          "then": {"properties": {"reason": {"const": "high_risk_or_control_plane"}}},
+          "else": {"properties": {"reason": {"const": "not_required"}}}
+        }
+      ]
+    },
+    "candidateCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate", "value", "proof_status"],
+      "properties": {
+        "predicate": {"const": "candidate.form"},
+        "value": {
+          "enum": [
+            "skill", "hook", "plugin", "prompt_workflow", "adapter",
+            "eval_harness", "external_tool_service", "unknown"
+          ]
+        },
+        "proof_status": {"const": "verified"}
+      }
+    },
+    "workflowCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate", "value", "proof_status"],
+      "properties": {
+        "predicate": {
+          "enum": [
+            "workflow.missing_surface",
+            "workflow.existing_equivalent_surface",
+            "workflow.inert_trial_available"
+          ]
+        },
+        "value": {"oneOf": [{"type": "boolean"}, {"const": "unknown"}]},
+        "proof_status": {"const": "verified"}
+      }
+    },
+    "targetCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate", "value", "proof_status"],
+      "properties": {
+        "predicate": {"const": "target.scope"},
+        "value": {
+          "enum": [
+            "hermes_static_source", "existing_operator_surface",
+            "outside_coverage", "unknown"
+          ]
+        },
+        "proof_status": {"const": "verified"}
+      }
+    },
+    "riskCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["predicate", "value", "proof_status"],
+      "properties": {
+        "predicate": {
+          "enum": [
+            "risk.credentials_access", "risk.browser_session_state",
+            "risk.network_api_contact", "risk.persistent_state",
+            "risk.repository_or_profile_config_write", "risk.user_data_access",
+            "risk.control_plane_change", "risk.prompt_injection_exposure",
+            "risk.irreversible_effect"
+          ]
+        },
+        "value": {"oneOf": [{"type": "boolean"}, {"const": "unknown"}]},
+        "proof_status": {"const": "verified"}
+      }
+    },
+    "matchCondition": {
+      "oneOf": [
+        {"$ref": "#/$defs/candidateCondition"},
+        {"$ref": "#/$defs/workflowCondition"},
+        {"$ref": "#/$defs/targetCondition"},
+        {"$ref": "#/$defs/riskCondition"}
+      ]
+    },
+    "ruleMatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["all_of"],
+      "properties": {
+        "all_of": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/matchCondition"}
+        }
+      }
+    },
+    "ruleEmission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_type", "assessment", "risk_surfaces", "oracle",
+        "required_capabilities", "unknowns", "disqualifying_conditions"
+      ],
+      "properties": {
+        "candidate_type": {
+          "oneOf": [{"$ref": "#/$defs/candidateType"}, {"type": "null"}]
+        },
+        "assessment": {"$ref": "#/$defs/assessment"},
+        "risk_surfaces": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/riskSurface"}
+        },
+        "oracle": {"$ref": "#/$defs/oracle"},
+        "required_capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"}
+        },
+        "unknowns": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_:-]*$"}
+        },
+        "disqualifying_conditions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_:-]*$"}
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_id", "priority", "match", "emit"],
+      "properties": {
+        "rule_id": {"type": "string", "pattern": "^rule:[a-z0-9][a-z0-9._:-]*/v1$"},
+        "priority": {"type": "integer", "minimum": 0},
+        "match": {"$ref": "#/$defs/ruleMatch"},
+        "emit": {"$ref": "#/$defs/ruleEmission"}
+      }
+    },
+    "rulesCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "artifact_type", "can_execute", "mutation",
+        "transport", "rollback_caveat", "catalog_id", "rules"
+      ],
+      "properties": {
+        "schema_version": {"const": "rerg-intake-derivation-rules/v1"},
+        "artifact_type": {"const": "intake-derivation-rules"},
+        "can_execute": {"const": false},
+        "mutation": {"$ref": "#/$defs/inertMutation"},
+        "transport": {"$ref": "#/$defs/inertTransport"},
+        "rollback_caveat": {
+          "const": "rollback_does_not_cover_leaked_data_or_poisoned_memory"
+        },
+        "catalog_id": {"const": "rerg-intake-derivation-rules:issue46/v1"},
+        "rules": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/rule"}
+        }
+      }
+    },
+    "requiredCapability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capability", "rule_id", "evidence_id", "input_observation_ids"
+      ],
+      "properties": {
+        "capability": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]*$"},
+        "rule_id": {"type": "string", "pattern": "^rule:[a-z0-9][a-z0-9._:-]*/v1$"},
+        "evidence_id": {"type": "string", "minLength": 1},
+        "input_observation_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "fieldProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field_path", "rule_id", "evidence_id", "input_observation_ids"
+      ],
+      "properties": {
+        "field_path": {
+          "type": "string",
+          "pattern": "^(candidate_type|assessment\\.(facts_complete|value|concrete_workflow_gap|dogfood_task|high_risk_or_surface|approval_required|disqualifying)|risk_surfaces\\[[a-z0-9._:-]+\\]|oracle\\.(required|reason)|required_capabilities\\[[a-z0-9._:-]+\\]|unknowns\\[[A-Z0-9_:-]+\\]|disqualifying_conditions\\[[A-Z0-9_:-]+\\])$"
+        },
+        "rule_id": {"type": "string", "pattern": "^rule:[a-z0-9][a-z0-9._:-]*/v1$"},
+        "evidence_id": {"type": "string", "minLength": 1},
+        "input_observation_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "derivationResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_type", "assessment", "risk_surfaces", "oracle",
+        "required_capabilities", "unknowns", "disqualifying_conditions",
+        "field_provenance"
+      ],
+      "properties": {
+        "candidate_type": {
+          "oneOf": [{"$ref": "#/$defs/candidateType"}, {"type": "null"}]
+        },
+        "assessment": {"$ref": "#/$defs/assessment"},
+        "risk_surfaces": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/riskSurface"}
+        },
+        "oracle": {"$ref": "#/$defs/oracle"},
+        "required_capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/requiredCapability"}
+        },
+        "unknowns": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_:-]*$"}
+        },
+        "disqualifying_conditions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "pattern": "^[A-Z][A-Z0-9_:-]*$"}
+        },
+        "field_provenance": {
+          "type": "array",
+          "minItems": 10,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/fieldProvenance"}
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"candidate_type": {"type": "null"}}},
+          "then": {
+            "properties": {
+              "assessment": {
+                "properties": {"facts_complete": {"const": false}}
+              },
+              "required_capabilities": {"maxItems": 0}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

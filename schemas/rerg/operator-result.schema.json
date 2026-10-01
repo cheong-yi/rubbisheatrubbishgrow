@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:hermes:rerg:v1:operator-result",
+  "title": "RERG operator result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "artifact_type", "can_execute", "mutation", "transport",
+    "rollback_caveat", "request_id", "candidate_id", "pin", "freshness",
+    "coverage", "unknowns", "blockers", "downgrade_reasons", "actions",
+    "minimal_safe_path", "provenance"
+  ],
+  "properties": {
+    "schema_version": {"const": "rerg-operator-result/v1"},
+    "artifact_type": {"const": "operator-result"},
+    "can_execute": {"type": "boolean", "const": false},
+    "mutation": {"$ref": "#/$defs/inertMutation"},
+    "transport": {"$ref": "#/$defs/inertTransport"},
+    "rollback_caveat": {"const": "rollback_does_not_cover_leaked_data_or_poisoned_memory"},
+    "request_id": {"type": "string", "minLength": 1},
+    "candidate_id": {"type": "string", "minLength": 1},
+    "pin": {"$ref": "#/$defs/pin"},
+    "freshness": {"$ref": "#/$defs/freshness"},
+    "coverage": {"$ref": "#/$defs/coverage"},
+    "unknowns": {"type": "array", "items": {"$ref": "#/$defs/unknown"}},
+    "blockers": {"type": "array", "items": {"$ref": "#/$defs/blocker"}},
+    "downgrade_reasons": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "actions": {"type": "array", "maxItems": 3, "items": {"$ref": "#/$defs/action"}},
+    "minimal_safe_path": {"type": ["string", "null"]},
+    "provenance": {"$ref": "#/$defs/pin"}
+  },
+  "$defs": {
+    "inertMutation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode"], "properties": {"mode": {"const": "inert"}}
+    },
+    "inertTransport": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode"], "properties": {"mode": {"const": "inert"}}
+    },
+    "pin": {
+      "type": "object", "additionalProperties": false,
+      "required": ["catalog_id", "catalog_path", "catalog_sha256"],
+      "properties": {
+        "catalog_id": {"const": "hermes-static-source:session-kickoff/v1"},
+        "catalog_path": {"const": "catalogs/rerg/hermes-static-source.json"},
+        "catalog_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "freshness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["evaluated_at", "max_age_seconds", "status"],
+      "properties": {
+        "evaluated_at": {"$ref": "#/$defs/timestamp"},
+        "max_age_seconds": {"type": "integer", "minimum": 0},
+        "status": {"enum": ["fresh", "stale", "future"]}
+      }
+    },
+    "coverage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["target", "required_capabilities", "covered_capabilities", "unknown_capabilities"],
+      "properties": {
+        "target": {"type": "string", "minLength": 1},
+        "required_capabilities": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "covered_capabilities": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "unknown_capabilities": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "unknown": {
+      "type": "object", "additionalProperties": false,
+      "required": ["capability", "reason"],
+      "properties": {"capability": {"type": "string", "minLength": 1}, "reason": {"type": "string", "minLength": 1}}
+    },
+    "blocker": {
+      "type": "object", "additionalProperties": false,
+      "required": ["code", "detail"],
+      "properties": {"code": {"type": "string", "minLength": 1}, "detail": {"type": "string", "minLength": 1}}
+    },
+    "action": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rank", "path", "capabilities", "reason", "recipe"],
+      "properties": {
+        "rank": {"type": "integer", "minimum": 1, "maximum": 3},
+        "path": {"type": "string", "minLength": 1},
+        "capabilities": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+        "reason": {"type": "string", "minLength": 1},
+        "recipe": {"$ref": "#/$defs/inertRecipe"}
+      }
+    },
+    "inertRecipe": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "mutation", "transport"],
+      "properties": {
+        "kind": {"type": "string", "minLength": 1},
+        "mutation": {"const": "inert"},
+        "transport": {"const": "inert"}
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+    }
+  }
+}

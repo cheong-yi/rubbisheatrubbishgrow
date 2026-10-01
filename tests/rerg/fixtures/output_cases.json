@@ -1,0 +1,45 @@
+{
+  "suite": "rerg-v1-inert-output-proof",
+  "mention_title": "Verified @everyone @here <@123> <@!123> <@&456> <#789> skill",
+  "mermaid": "flowchart LR\n  candidate_adapter[\"candidate-adapter\"] -->|\"route: reject\"| result_candidate_adapter[\"gate: fail\"]\n  result_candidate_adapter -->|\"lane\"| lane_backlog[\"lane: backlog\"]\n  candidate_eval[\"candidate-eval\"] -->|\"route: pilot_first\"| result_candidate_eval[\"gate: partial\"]\n  result_candidate_eval -->|\"lane\"| lane_sandbox_spike[\"lane: sandbox_spike\"]\n  candidate_hook[\"candidate-hook\"] -->|\"route: pilot_first\"| result_candidate_hook[\"gate: blocked\"]\n  result_candidate_hook -->|\"lane\"| lane_sandbox_spike[\"lane: sandbox_spike\"]\n  candidate_plugin[\"candidate-plugin\"] -->|\"route: needs_more_facts\"| result_candidate_plugin[\"gate: needs_more_facts\"]\n  result_candidate_plugin -->|\"lane\"| lane_reference[\"lane: reference\"]\n  candidate_prompt[\"candidate-prompt\"] -->|\"route: defer\"| result_candidate_prompt[\"gate: pass\"]\n  result_candidate_prompt -->|\"lane\"| lane_reference[\"lane: reference\"]\n  candidate_service[\"candidate-service\"] -->|\"route: defer\"| result_candidate_service[\"gate: blocked\"]\n  result_candidate_service -->|\"lane\"| lane_backlog[\"lane: backlog\"]\n  candidate_skill[\"candidate-skill\"] -->|\"route: adopt_now\"| result_candidate_skill[\"gate: pass\"]\n  result_candidate_skill -->|\"lane\"| lane_dogfood[\"lane: dogfood\"]\n",
+  "markdown": "# RERG decision packet\n\n- Mode: `packet`\n- Executable: `false`\n- Mutation: `inert`\n- Transport: `inert`\n- Rollback caveat: `rollback_does_not_cover_leaked_data_or_poisoned_memory`\n\n## Decisions\n\n| Candidate | Route | Lane | Gate |\n|---|---|---|---|\n| `candidate-adapter` | `reject` | `backlog` | `fail` |\n| `candidate-eval` | `pilot_first` | `sandbox_spike` | `partial` |\n| `candidate-hook` | `pilot_first` | `sandbox_spike` | `blocked` |\n| `candidate-plugin` | `needs_more_facts` | `reference` | `needs_more_facts` |\n| `candidate-prompt` | `defer` | `reference` | `pass` |\n| `candidate-service` | `defer` | `backlog` | `blocked` |\n| `candidate-skill` | `adopt_now` | `dogfood` | `pass` |\n",
+  "discord_card": {
+    "schema_version": "rerg-discord-card/v1",
+    "mode": "dry_run",
+    "can_execute": false,
+    "mutation": {"mode": "inert"},
+    "transport": {"mode": "inert"},
+    "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+    "live_discord_allowed": false,
+    "allowed_mentions": {"parse": [], "replied_user": false},
+    "embeds": [
+      {
+        "title": "RERG packet decision (inert dry run)",
+        "description": "7 validated decisions; no execution or mutation authority.",
+        "fields": [
+          {"name": "candidate-adapter — Rejected adapter", "value": "route=reject | lane=backlog | gate=fail", "inline": false},
+          {"name": "candidate-eval — Reversible evaluation harness", "value": "route=pilot_first | lane=sandbox_spike | gate=partial", "inline": false},
+          {"name": "candidate-hook — Approval-gated hook", "value": "route=pilot_first | lane=sandbox_spike | gate=blocked", "inline": false},
+          {"name": "candidate-plugin — Unknown plugin", "value": "route=needs_more_facts | lane=reference | gate=needs_more_facts", "inline": false},
+          {"name": "candidate-prompt — Reference prompt", "value": "route=defer | lane=reference | gate=pass", "inline": false},
+          {"name": "candidate-service — High-surface external service", "value": "route=defer | lane=backlog | gate=blocked", "inline": false},
+          {"name": "candidate-skill — Verified @​everyone @​here <@​123> <@​!123> <@​&456> <#​789> skill", "value": "route=adopt_now | lane=dogfood | gate=pass", "inline": false}
+        ]
+      }
+    ]
+  },
+  "canonical_input": {"z": 1, "a": ["雪", {"β": true}]},
+  "canonical_json": "{\"a\":[\"雪\",{\"β\":true}],\"z\":1}",
+  "canonical_hash": "sha256:b0eb6c817789c4f5e0dcba454962902b71203a4baa06ff50698e60c71da4a345",
+  "receipt": {
+    "schema_version": "rerg-receipt/v1",
+    "receipt_id": "local-receipt-0001",
+    "can_execute": false,
+    "mutation": {"mode": "inert"},
+    "transport": {"mode": "inert"},
+    "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+    "source_hash": "sha256:c2769339922917c884393fdfe79909b9abe84565d09efa650d14f2aa32277411",
+    "fetched_hash": "sha256:c2769339922917c884393fdfe79909b9abe84565d09efa650d14f2aa32277411",
+    "verified": true
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:hermes:rerg:v1:authority-risk",
+  "title": "RERG v1 authority and risk packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "can_execute",
+    "mutation",
+    "transport",
+    "rollback_caveat",
+    "packet_id",
+    "authority",
+    "risk_screen"
+  ],
+  "properties": {
+    "schema_version": {"const": "rerg/v1"},
+    "artifact_type": {"const": "authority-risk"},
+    "can_execute": {"type": "boolean", "const": false},
+    "mutation": {"$ref": "#/$defs/inertMutation"},
+    "transport": {"$ref": "#/$defs/inertTransport"},
+    "rollback_caveat": {"const": "rollback_does_not_cover_leaked_data_or_poisoned_memory"},
+    "packet_id": {"type": "string", "minLength": 1},
+    "authority": {"$ref": "#/$defs/authority"},
+    "risk_screen": {"$ref": "#/$defs/riskScreen"}
+  },
+  "$defs": {
+    "inertMutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    },
+    "inertTransport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {"mode": {"const": "inert"}}
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "risk_class",
+        "mutation_surface",
+        "requires_approval",
+        "proof_required",
+        "can_execute",
+        "authority_boundary",
+        "irreversibility_risk"
+      ],
+      "properties": {
+        "risk_class": {"enum": ["low", "medium", "high", "critical"]},
+        "mutation_surface": {"const": "inert"},
+        "requires_approval": {"type": "boolean"},
+        "proof_required": {"type": "boolean"},
+        "can_execute": {"type": "boolean", "const": false},
+        "authority_boundary": {"type": "string", "minLength": 1},
+        "irreversibility_risk": {"enum": ["none", "low", "medium", "high"]}
+      }
+    },
+    "riskScreen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "credentials",
+        "browser_session_state",
+        "network_api_surface",
+        "persistent_state",
+        "repo_config_mutation",
+        "user_data",
+        "cron_hooks_mcp_plugins_server",
+        "prompt_injection_surface",
+        "irreversible_effects"
+      ],
+      "properties": {
+        "credentials": {"type": "boolean"},
+        "browser_session_state": {"type": "boolean"},
+        "network_api_surface": {"type": "boolean"},
+        "persistent_state": {"type": "boolean"},
+        "repo_config_mutation": {"type": "boolean"},
+        "user_data": {"type": "boolean"},
+        "cron_hooks_mcp_plugins_server": {"type": "boolean"},
+        "prompt_injection_surface": {"type": "boolean"},
+        "irreversible_effects": {"type": "boolean"}
+      }
+    }
+  }
+}

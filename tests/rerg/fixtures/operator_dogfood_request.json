@@ -1,0 +1,37 @@
+{
+  "schema_version": "rerg-operator-request/v1",
+  "artifact_type": "operator-request",
+  "candidate": {
+    "schema_version": "rerg/v1",
+    "artifact_type": "candidate",
+    "can_execute": false,
+    "mutation": {"mode": "inert"},
+    "transport": {"mode": "inert"},
+    "rollback_caveat": "rollback_does_not_cover_leaked_data_or_poisoned_memory",
+    "candidate_id": "candidate-session-kickoff",
+    "candidate_type": "plugin",
+    "title": "Session kickoff continuation",
+    "summary": "A repository-owned inert candidate."
+  },
+  "catalog_id": "hermes-static-source:session-kickoff/v1",
+  "catalog_path": "catalogs/rerg/hermes-static-source.json",
+  "catalog_sha256": "sha256:04d766dd6ef4e2b15c918ca508d5a018ed7a019e07550d64a1d4629551e2c34d",
+  "evaluated_at": "2026-07-13T00:00:00Z",
+  "max_age_seconds": 86400,
+  "target": "hermes-static",
+  "required_capabilities": ["static-hermes-source-set"],
+  "path_candidates": [
+    {
+      "rank": 1,
+      "path": "examples/rerg/portable-primitive-map-proof.json",
+      "capabilities": ["static-hermes-source-set"],
+      "recipe": {"kind": "read-only-fixture", "mutation": "inert", "transport": "inert"}
+    },
+    {
+      "rank": 2,
+      "path": "examples/rerg/a-proof.json",
+      "capabilities": ["static-hermes-source-set"],
+      "recipe": {"kind": "read-only-fixture", "mutation": "inert", "transport": "inert"}
+    }
+  ]
+}

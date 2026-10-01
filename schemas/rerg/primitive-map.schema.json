@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:hermes:rerg:primitive-map:v1",
+  "title": "Portable target primitive map v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_type",
+    "catalog_id",
+    "freshness_policy",
+    "coverage",
+    "unknowns",
+    "facts"
+  ],
+  "properties": {
+    "schema_version": {"const": "primitive-map/v1"},
+    "artifact_type": {"const": "primitive-map"},
+    "catalog_id": {"type": "string", "minLength": 1},
+    "freshness_policy": {"$ref": "#/$defs/freshnessPolicy"},
+    "coverage": {"$ref": "#/$defs/coverage"},
+    "unknowns": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/unknown"}
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {"$ref": "#/$defs/observedFact"},
+          {"$ref": "#/$defs/derivedClaim"}
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "freshnessPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evaluated_at", "max_age_seconds"],
+      "properties": {
+        "evaluated_at": {"$ref": "#/$defs/timestamp"},
+        "max_age_seconds": {"type": "integer", "minimum": 0}
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targets", "limitations"],
+      "properties": {
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "unknown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "target", "capability", "reason"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "target": {"type": "string", "minLength": 1},
+        "capability": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "artifact_digest"],
+      "properties": {
+        "artifact_id": {"type": "string", "minLength": 1},
+        "artifact_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "observedFact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "target",
+        "capability",
+        "value",
+        "source",
+        "observed_at"
+      ],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {"const": "observed"},
+        "target": {"type": "string", "minLength": 1},
+        "capability": {"type": "string", "minLength": 1},
+        "value": {"type": "boolean"},
+        "source": {"$ref": "#/$defs/source"},
+        "observed_at": {"$ref": "#/$defs/timestamp"}
+      }
+    },
+    "derivation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "version", "input_fact_ids"],
+      "properties": {
+        "method": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "input_fact_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "derivedClaim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "target",
+        "capability",
+        "value",
+        "derivation"
+      ],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {"const": "derived"},
+        "target": {"type": "string", "minLength": 1},
+        "capability": {"type": "string", "minLength": 1},
+        "value": {"type": "boolean"},
+        "derivation": {"$ref": "#/$defs/derivation"}
+      }
+    }
+  }
+}
