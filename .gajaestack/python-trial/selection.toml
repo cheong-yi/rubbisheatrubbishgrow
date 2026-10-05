@@ -1,0 +1,5 @@
+# Explicit local selection; dependencies are provisioned separately.
+selected = ["ruff", "mypy", "pytest", "hypothesis"]
+
+# New tool checks remain trial/advisory until their result and cost are reviewed.
+advisory = ["ruff", "mypy"]
